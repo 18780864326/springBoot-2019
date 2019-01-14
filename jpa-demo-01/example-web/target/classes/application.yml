@@ -1,0 +1,14 @@
+spring: 
+  profile: 
+    active: Jpa_jdbc
+#配置数据库 连接池
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+    username: scott
+    password: 1234
+    ##配置jpa 日志 sql显示
+  jpa: 
+    hibernate: 
+      ddl-auto: update
+      show-sql: true

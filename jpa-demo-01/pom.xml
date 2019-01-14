@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.example</groupId>
+  <artifactId>jpa-demo-01</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>example-parent</name>
+  
+  <description>springBoot-parent 聚合工程 </description>
+  
+  <!-- 继承说明：这里继承SpringBoot提供的父工程 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+  
+	<modules>
+		<module>example-repository</module>
+		<module>example-web</module>
+  </modules>
+		<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	
+	 <!-- 版本说明：这里统一管理依赖的版本号 -->
+	<dependencyManagement>
+			<dependencies>
+				<dependency>
+						  <groupId>com.example</groupId>
+	  					<artifactId>example-web</artifactId>
+	  					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+						  <groupId>com.example</groupId>
+	  					<artifactId>example-repository</artifactId>
+	  					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+						  <groupId>com.example</groupId>
+	  					<artifactId>baseRepository</artifactId>
+	  					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+			<dependency>
+			    <groupId>com.oracle</groupId>
+			    <artifactId>ojdbc6</artifactId>
+			    <version>11.2.0.4.0-atlassian-hosted</version>
+			    <scope>test</scope>
+			</dependency>
+			<!-- 引入Druid依赖 -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>druid</artifactId>
+			    <version>1.1.12</version>
+			</dependency>
+			</dependencies>
+	</dependencyManagement>
+</project>

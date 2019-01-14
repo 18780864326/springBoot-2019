@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering 
+PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" 
+"http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<type-mapping>
+	<sql-type jdbc-type="VARCHAR" hibernate-type="java.lang.String"></sql-type>
+	<sql-type jdbc-type="DATE" hibernate-type="java.sql.Timestamp"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="18" scale="0" hibernate-type="java.lang.Long"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="19" scale="0" hibernate-type="java.lang.Long"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="12" scale="0" hibernate-type="java.lang.Long"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="7" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="6" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="5" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="3" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="4" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="2" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="1" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="16" scale="2" hibernate-type="java.math.BigDecimal"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="5" scale="4" hibernate-type="java.math.BigDecimal"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="10" scale="4" hibernate-type="java.math.BigDecimal"></sql-type>
+	<sql-type jdbc-type="NUMERIC" precision="8" scale="0" hibernate-type="java.lang.Integer"></sql-type>
+</type-mapping>
+  <table-filter match-schema="SCOTT" match-name="TEST_USER"/>
+</hibernate-reverse-engineering>
