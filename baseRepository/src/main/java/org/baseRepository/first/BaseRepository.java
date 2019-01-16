@@ -53,7 +53,6 @@ public interface BaseRepository<T,ID extends Serializable> extends JpaRepository
 		  * @return List<Map<String,Object>>
 		  * @todo 建议使用 ListBySqlToDto方法
 		  */
-		 @Deprecated
 		 List<Map<String,Object>> listBySqlToMap(String sql);
 		 
 		 /**
@@ -72,21 +71,33 @@ public interface BaseRepository<T,ID extends Serializable> extends JpaRepository
 		  * @param startIndex	开始下标
 		  * @param endIndex	结束下标
 		  * @return 结果集合 map<String,Object>
-		  * @todo 建议使用 ListBySqlToDto方法
+		  * @todo 建议使用 ListBySqlAndPageInfoToListDto方法
 		  */
-		 @Deprecated
 		 List<Map<String,Object>> ListBySqlAndPageInfoToMap(String sql,Integer startIndex , Integer endIndex);	
 		 
 		 /**
-		  * 传入  要分页的  sql 语句
+		  * <p>传入  要分页的  sql 语句
 		  * 自动 拼接 rownum 进行 分页 
+		  * 传入 要查询的sql
+		  *  可以应用原始SQL查询，允许它返回非托管实体
+		  *  要求Dto 的属性名与 结果集的列名必须一一对应 
+		  *  因为Oracle 数据库 自动结果集列名大写 请加上 as "属性名" 
+		  *  防止自动初始化为大写.
+		  *  <p>
+		  *  <code>
+		  *  select 	
+		  *  	t.id as \"id\" ,
+		  *  	t.user_name as \"userName\"  ,
+		  *  	t.password as \"password\"  
+		  *  from TEST_USER t
+		  *  </code>
+		  *  <p>Dto 数字类型 必须写  java.lang.Number<p>
 		  * @param sql 
 		  * @param startIndex	开始下标
 		  * @param endIndex	结束下标
 		  * @return 结果集合 map<String,Object>
 		  * @todo 建议使用 ListBySqlToDto方法
 		  */
-		 @Deprecated
 		 List<?> ListBySqlAndPageInfoToListDto(String sql,Integer startIndex , Integer endIndex,Class<?> _class);	
 		 
 		 
@@ -111,4 +122,3 @@ public interface BaseRepository<T,ID extends Serializable> extends JpaRepository
 		  */
 		 List<?> ListBySqlToDto(String sql ,Class<?> _class);
 }
-
