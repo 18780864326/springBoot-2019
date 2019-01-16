@@ -106,7 +106,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 				"  where t.rownumber <= "+ endIndex 
 				+ " and t.rownumber >=" +  startIndex;
 		List<?> resultList = (List<?>) session.createNativeQuery(PageStrStart+sql+PageStrEnd).setResultTransformer( Transformers.aliasToBean( _class )).list();
-		return null;
+		return resultList;
 	}
 
 }
