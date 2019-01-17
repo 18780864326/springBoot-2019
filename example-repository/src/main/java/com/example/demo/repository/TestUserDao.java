@@ -9,4 +9,5 @@ import com.example.demo.entity.TestUser;
 //}
 public interface TestUserDao  extends  BaseRepository<TestUser,Long>{
 
+	public TestUser findByUserNameAndPassword(String userName , String password);
 }
