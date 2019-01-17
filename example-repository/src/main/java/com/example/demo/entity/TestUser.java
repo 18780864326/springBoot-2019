@@ -13,6 +13,10 @@ import javax.persistence.Table;
 @Table(name = "TEST_USER", schema = "SCOTT")
 public class TestUser implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4693849263359339736L;
 	private Long id;
 	private String userName;
 	private String password;
