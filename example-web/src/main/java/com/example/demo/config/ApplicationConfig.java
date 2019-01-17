@@ -1,9 +1,7 @@
 package com.example.demo.config;
 
 
-
 import javax.sql.DataSource;
-
 import org.baseRepository.first.BaseRepositoryFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
