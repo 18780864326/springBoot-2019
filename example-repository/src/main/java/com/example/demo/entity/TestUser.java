@@ -1,5 +1,5 @@
 package com.example.demo.entity;
-// Generated 2019-1-8 8:52:12 by Hibernate Tools 5.0.6.Final
+// Generated 2019/1/18 ���� 05:06:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +13,6 @@ import javax.persistence.Table;
 @Table(name = "TEST_USER", schema = "SCOTT")
 public class TestUser implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4693849263359339736L;
 	private Long id;
 	private String userName;
 	private String password;
@@ -63,9 +59,4 @@ public class TestUser implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "TestUser [id=" + id + ", userName=" + userName + ", password=" + password + "]";
-	}
-	
 }
