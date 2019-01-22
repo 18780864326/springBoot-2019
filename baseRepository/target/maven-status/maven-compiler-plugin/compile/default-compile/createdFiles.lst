@@ -1,5 +1,4 @@
 org\baseRepository\first\BaseRepositoryImpl.class
-org\baseRepository\utils\ReflectUtils.class
 org\baseRepository\first\BaseRepository.class
 org\baseRepository\first\BaseRepositoryFactoryBean$BaseRepositoryFactory.class
 org\baseRepository\first\BaseRepositoryFactoryBean.class
