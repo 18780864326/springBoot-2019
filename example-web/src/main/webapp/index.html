@@ -19,7 +19,7 @@
 							  <div class="layui-form-item">
 							    <label class="layui-form-label">用户</label>
 							    <div class="layui-input-inline">
-							      <input type="text" name="userName" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+							      <input type="text" name="userName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							  <div class="layui-form-item">
@@ -58,10 +58,12 @@
 								 return false;
 								},
 							success:function(result){
-									if(result != null){
-										layer.msg("登录成功");
+									if(result.status == 1){
+										layer.msg(result.msg);
 										location.href='/static/html/system/systemHomePage.html';
-										}
+										}else{
+											layer.msg(result.msg);
+											}
 								}
 						});
 			   // layer.msg(JSON.stringify(data.field));
