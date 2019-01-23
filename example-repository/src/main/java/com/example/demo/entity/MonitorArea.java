@@ -20,7 +20,7 @@ public class MonitorArea implements java.io.Serializable {
 	private String monitorDescription;
 	private String monitorNvrIp;
 	private String monitorNvrPassword;
-	private BigDecimal monitorCh;
+	private Integer monitorCh;
 	private String monitorNvrUser;
 	private String monitorCameraIp;
 
@@ -32,7 +32,7 @@ public class MonitorArea implements java.io.Serializable {
 	}
 
 	public MonitorArea(Long monitorId, String monitorPlay, Long monitorAreaId, String monitorDescription,
-			String monitorNvrIp, String monitorNvrPassword, BigDecimal monitorCh, String monitorNvrUser,
+			String monitorNvrIp, String monitorNvrPassword, Integer monitorCh, String monitorNvrUser,
 			String monitorCameraIp) {
 		this.monitorId = monitorId;
 		this.monitorPlay = monitorPlay;
@@ -101,12 +101,12 @@ public class MonitorArea implements java.io.Serializable {
 		this.monitorNvrPassword = monitorNvrPassword;
 	}
 
-	@Column(name = "MONITOR_CH", precision = 22, scale = 0)
-	public BigDecimal getMonitorCh() {
+	@Column(name = "MONITOR_CH")
+	public Integer getMonitorCh() {
 		return this.monitorCh;
 	}
 
-	public void setMonitorCh(BigDecimal monitorCh) {
+	public void setMonitorCh(Integer monitorCh) {
 		this.monitorCh = monitorCh;
 	}
 

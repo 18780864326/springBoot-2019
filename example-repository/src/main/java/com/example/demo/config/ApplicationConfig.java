@@ -4,14 +4,9 @@ package com.example.demo.config;
 
 import javax.sql.DataSource;
 
-import org.baseRepository.first.BaseRepositoryFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.alibaba.druid.pool.DruidDataSource;
 
 /**
