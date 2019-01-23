@@ -109,4 +109,20 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		return resultList;
 	}
 
+	@Override
+	public List<T> listBySqlAndPageInfoToListEntity(String sql, Integer startIndex, Integer endIndex,
+			Class<T> resultClass) {
+		String PageStrStart ="select * from ( \r\n" + 
+				"    select rownum rownumber ,t.* from (  ";
+		String PageStrEnd = "  )t \r\n" + 
+				"    )t \r\n" + 
+				"  where t.rownumber <= "+ endIndex 
+				+ " and t.rownumber >=" +  startIndex;
+		Query query =  entityManager.createNativeQuery(PageStrStart+sql+PageStrEnd, resultClass);
+		@SuppressWarnings("unchecked")
+		List<T> resultList = query.getResultList();
+		return resultList;
+	}
+
+
 }

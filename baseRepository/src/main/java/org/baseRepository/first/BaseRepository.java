@@ -30,6 +30,10 @@ public interface BaseRepository<T,ID extends Serializable> extends JpaRepository
 		 * @return	  指定了返回有映射关系的实体类型 List 
 		 */
 		 List<T> listBySqlToListEntity(String sql,Class<T> resultClass);
+		 
+		 
+		 
+		 List<T> listBySqlAndPageInfoToListEntity(String sql,Integer startIndex , Integer endIndex,Class<T> resultClass);
 		
 		 /**
 			 *  传入SQL查询语句 返回结果集 映射结果为一列
