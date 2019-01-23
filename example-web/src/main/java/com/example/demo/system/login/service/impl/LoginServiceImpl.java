@@ -22,4 +22,10 @@ public class LoginServiceImpl  implements LoginService{
 		TestUser  testUser =   testUserDao.findByUserNameAndPassword(userName, password);
 		return testUser;
 	}
+
+	@Override
+	public int logOut() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 }

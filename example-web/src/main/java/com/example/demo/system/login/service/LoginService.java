@@ -11,4 +11,6 @@ public interface LoginService {
 	 * @return
 	 */
 	TestUser findUserInfoByDto(LoginDto loginDto);
+
+	int logOut();
 }

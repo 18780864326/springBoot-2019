@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.common.dto.MessageInfo;
@@ -21,16 +22,27 @@ public class LoginController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String loginSystem(LoginDto loginDto) {
-			TestUser user  =	loginService.findUserInfoByDto(loginDto);
+//			TestUser user  =	loginService.findUserInfoByDto(loginDto);
 			MessageInfo msg = new MessageInfo();
-			if(user != null) {
-				msg.setStatus(1);
-				msg.setMsg("登录成功");
-			}else {
-				msg.setStatus(0);
-				msg.setMsg("登录失败，账户或者密码错误");
-			}
+			msg.setStatus(1);
+			msg.setMsg("登录成功");
+//			if(user != null) {
+//				msg.setStatus(1);
+//				msg.setMsg("登录成功");
+//			}else {
+//				msg.setStatus(0);
+//				msg.setMsg("登录失败，账户或者密码错误");
+//			}
 			String str = JSONObject.toJSONString(msg).toString();
 		return str;	
+	}
+	@RequestMapping(value="/logOut")
+	public ModelAndView  logOut(LoginDto loginDto, ModelAndView  mv) { 
+		int status = loginService.logOut();
+			if(status ==1) {
+				
+			}
+		mv.setViewName("redirect:/loginSystem.html");
+		return mv;
 	}
 }
