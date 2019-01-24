@@ -65,7 +65,7 @@ public class MonitorArea implements java.io.Serializable {
 		this.monitorPlay = monitorPlay;
 	}
 
-	@Column(name = "MONITOR_AREA_ID", precision = 22, scale = 0)
+	@Column(name = "MONITOR_AREA_ID")
 	public Long getMonitorAreaId() {
 		return this.monitorAreaId;
 	}
