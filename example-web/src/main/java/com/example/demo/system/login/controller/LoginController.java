@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.common.dto.MessageInfo;
 import com.example.demo.entity.TestUser;
 import com.example.demo.system.login.dto.LoginDto;
 import com.example.demo.system.login.service.LoginService;
+import com.example.demo.vo.MessageInfo;
 
 @RestController
 @RequestMapping("/system")

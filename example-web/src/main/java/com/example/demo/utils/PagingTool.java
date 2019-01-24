@@ -25,7 +25,7 @@ public class PagingTool  <T>{
     /**
      * 每页显示条数
      */
-    private int pageNumber = 5;
+    private int pageSize = 5;
     /**
      * 数据库中从第几条开始取（dbIndex, dbNumber配合在Oracle中使用）
      */
@@ -44,8 +44,8 @@ public class PagingTool  <T>{
      */
     public void count() {
         // 计算总页数
-        int totalPageTemp = this.totalNumber / this.pageNumber;
-        int plus = (this.totalNumber % this.pageNumber) == 0 ? 0 : 1;
+        int totalPageTemp = this.totalNumber / this.pageSize;
+        int plus = (this.totalNumber % this.pageSize) == 0 ? 0 : 1;
         totalPageTemp = totalPageTemp + plus;
         if(totalPageTemp <= 0) {
             totalPageTemp = 1;
@@ -63,12 +63,12 @@ public class PagingTool  <T>{
         }
         
         // 设置rownum的参数
-        this.dbIndex = (this.currentPage - 1) * this.pageNumber +1;
-        this.dbNumber = this.pageNumber;
+        this.dbIndex = (this.currentPage - 1) * this.pageSize +1;
+        this.dbNumber = this.pageSize;
         if(currentPage ==totalPage ) {
         	this.dbEnd =  totalNumber;
         }else {
-        	this.dbEnd =  this.currentPage * this.pageNumber;        	
+        	this.dbEnd =  this.currentPage * this.pageSize;        	
         }
     }
 
@@ -97,15 +97,15 @@ public class PagingTool  <T>{
         this.totalPage = totalPage;
     }
 
-    public int getPageNumber() {
-        return pageNumber;
-    }
+    public int getPageSize() {
+		return pageSize;
+	}
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
-    }
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 
-    public int getDbIndex() {
+	public int getDbIndex() {
         return dbIndex;
     }
 
@@ -142,7 +142,7 @@ public class PagingTool  <T>{
     public String toString() {
         return "Page [totalNumber=" + totalNumber + ", currentPage="
                 + currentPage + ", totalPage=" + totalPage + ", pageNumber="
-                + pageNumber + ", dbIndex=" + dbIndex + ", dbNumber="
+                + pageSize + ", dbIndex=" + dbIndex + ", dbNumber="
                 + dbNumber + ", dbEnd=" + dbEnd + "]";
     }
 
