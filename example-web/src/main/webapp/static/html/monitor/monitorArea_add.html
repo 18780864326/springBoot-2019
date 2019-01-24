@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>监控系统</title>
+  <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form" action="">
+<div class="layui-fluid" >
+	<div class="layui-card" >
+		<div class="layui-card-header">监控信息增加</div>
+		<form class="layui-form" action="">
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">所屬樓棟</label>
+	    	<div class="layui-input-block">
+	      	<input type="text" name="lineAreaBuild" required lay-verify="required" placeholder="播放路徑參數" autocomplete="off" class="layui-input">
+	    	</div>
+		</div>
+		
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">所属楼层</label>
+	      <div class="layui-input-block">
+		      <textarea name="lineAreaF" placeholder="请输入内容" class="layui-textarea"></textarea>
+		    </div>
+		</div>	
+		
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">所属线别/模组</label>
+	    	<div class="layui-input-block ">
+	      	<input type="text" name="lineAreaLine" required lay-verify="required" placeholder="NVR IP" autocomplete="off" class="layui-input">
+	    	</div>
+		</div>	
+		
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">所屬線別/模組下的區域劃分</label>
+	    	<div class="layui-input-block">
+	      	<input type="text" name="lineAreaName" required lay-verify="required|number" placeholder="NVR 通道" autocomplete="off" class="layui-input">
+	    	</div>
+		</div>	
+		
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">線別區域描述</label>
+	    	<div class="layui-input-block">
+	      	<input type="text" name="lineAreaDescription" required lay-verify="required" placeholder="NVR 賬號" autocomplete="off" class="layui-input">
+	    	</div>
+		</div>	
+		
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">所屬製程</label>
+	    	<div class="layui-input-block">
+	      	<input type="text" name="lineAreaProcess" required lay-verify="required" placeholder="NVR PASSWORD" autocomplete="off" class="layui-input">
+	    	</div>
+		</div>	
+	</div>
+ </div>	
+  
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+    <script src="/demo/static/layui/layui.js"></script>
+	<script>
+	layui.use('form', function(){
+		  var form = layui.form;
+		  var index = parent.layer.getFrameIndex(window.name)
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+			  parent.layer.msg(JSON.stringify(data.field));
+		   	 parent.layer.close(index);
+		    return false;
+		  });
+		});
+	</script>
+</body>
+</html>

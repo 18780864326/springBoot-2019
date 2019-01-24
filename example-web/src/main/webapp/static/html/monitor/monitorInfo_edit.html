@@ -72,25 +72,13 @@
 </form>
     <script src="/demo/static/layui/layui.js"></script>
 	<script>
-	layui.use('form', function(){ 
+	layui.use('form', function(){
 		  var form = layui.form;
 		  var index = parent.layer.getFrameIndex(window.name)
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-
-			  layer.msg('你确定提交信息？', {
-				  time: 0 //不自动关闭
-				  ,btn: ['必须啊', '丑到爆']
-				  ,yes: function(index){
-				    layer.close(index);
-				    layer.msg('雅蠛蝶 O.o', {
-				      icon: 6
-				      ,btn: ['嗷','嗷','嗷']
-				    });
-				  }
-				});
-			parent.layer.msg(JSON.stringify(data.field));
-			parent.layer.close(index);
+			  parent.layer.msg(JSON.stringify(data.field));
+		    parent.layer.close(index);
 		    return false;
 		  });
 		});
