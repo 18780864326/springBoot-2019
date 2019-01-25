@@ -30,7 +30,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 			int pageIndex) {
 		 PagingTool<Map<String, Object>> pagingTool = new PagingTool<Map<String, Object>>();
 		 pagingTool.setPageSize(pageSize);
-		 pagingTool.setDbIndex(pageIndex);
+		 pagingTool.setCurrentPage(pageIndex);
 		 String lineAreaProcess = monitorInfoDto.getLineAreaProcess();
 		 
 		String sql = "\r\n" + 
@@ -74,7 +74,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 			int pageIndex) {
 		 PagingTool<LineArea> pagingTool = new PagingTool<LineArea>();
 		 pagingTool.setPageSize(pageSize);
-		 pagingTool.setDbIndex(pageIndex);
+		 pagingTool.setCurrentPage(pageIndex);
 		 String lineAreaProcess = lineAreaDto.getLineAreaProcess(); //条件参数 制程
 		 String lineAreaBuild = lineAreaDto.getLineAreaBuild();//条件 参数 楼栋
 //		 String lineAreaF = lineAreaDto.getLineAreaF();//条件 参数 楼层
@@ -97,7 +97,6 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 		}
 		Integer countNumber = monitorAreaRepository.countBySqlToInteger(sql);
 		pagingTool.setTotalNumber(countNumber);
-		System.out.println();
 		List<LineArea> list = lineAreaRepository.listBySqlAndPageInfoToListEntity(sql, pagingTool.getDbIndex(), pagingTool.getDbEnd(), LineArea.class);
 		pagingTool.setDataList(list);
 		return pagingTool;

@@ -10,54 +10,45 @@
 <form class="layui-form" action="">
 <div class="layui-fluid" >
 	<div class="layui-card" >
-		<div class="layui-card-header">监控信息增加</div>
-		<form class="layui-form" action="">
-		<div class="layui-form-item">
-	    	<label class="layui-form-label">播放路徑</label>
+		<div class="layui-form-item" style="margin-top: 1rem">
+	    	<label class="layui-form-label" >樓棟</label>
 	    	<div class="layui-input-block">
-	      	<input type="text" name="monitorPlay" required lay-verify="required" placeholder="播放路徑參數" autocomplete="off" class="layui-input">
+	      	<input type="text" name="lineAreaBuild" placeholder="请输入所属楼栋" autocomplete="off" class="layui-input">
 	    	</div>
 		</div>
 		
 		<div class="layui-form-item">
-	    	<label class="layui-form-label">镜头描述</label>
+	    	<label class="layui-form-label">楼层</label>
 	      <div class="layui-input-block">
-		      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+	        	<input type="text" name="lineAreaF" placeholder="请输入所属楼层" autocomplete="off" class="layui-input">
 		    </div>
 		</div>	
 		
 		<div class="layui-form-item">
-	    	<label class="layui-form-label">NVR IP</label>
+	    	<label class="layui-form-label">线别/模组</label>
 	    	<div class="layui-input-block ">
-	      	<input type="text" name="monitorNvrIp" required lay-verify="required" placeholder="NVR IP" autocomplete="off" class="layui-input">
+	      	<input type="text" name="lineAreaLine"  placeholder="请输入所属线别/模组 " autocomplete="off" class="layui-input">
 	    	</div>
 		</div>	
 		
 		<div class="layui-form-item">
-	    	<label class="layui-form-label">NVR 通道</label>
+	    	<label class="layui-form-label">區域劃分</label>
 	    	<div class="layui-input-block">
-	      	<input type="text" name="monitorCh" required lay-verify="required|number" placeholder="NVR 通道" autocomplete="off" class="layui-input">
+	      	<input type="text" name="lineAreaName"  placeholder="请输入線別/模組下的區域劃分" autocomplete="off" class="layui-input">
 	    	</div>
 		</div>	
 		
 		<div class="layui-form-item">
-	    	<label class="layui-form-label">NVR 賬號</label>
+	    	<label class="layui-form-label">區域描述</label>
 	    	<div class="layui-input-block">
-	      	<input type="text" name="monitorNvrUser" required lay-verify="required" placeholder="NVR 賬號" autocomplete="off" class="layui-input">
+	    	  <textarea name="lineAreaDescription" placeholder="请输入線別區域描述" class="layui-textarea"></textarea>
 	    	</div>
 		</div>	
 		
 		<div class="layui-form-item">
-	    	<label class="layui-form-label">NVR_密码</label>
+	    	<label class="layui-form-label">製程</label>
 	    	<div class="layui-input-block">
-	      	<input type="text" name="monitorNvrPassword" required lay-verify="required" placeholder="NVR PASSWORD" autocomplete="off" class="layui-input">
-	    	</div>
-		</div>	
-		
-		<div class="layui-form-item">
-	    	<label class="layui-form-label">摄像头IP</label>
-	    	<div class="layui-input-block">
-	      	<input type="text" name="monitorCameraIp" placeholder="摄像头IP" autocomplete="off" class="layui-input">
+	      	<input type="text" name="lineAreaProcess"  placeholder="请输入所屬製程" autocomplete="off" class="layui-input">
 	    	</div>
 		</div>	
 	</div>
@@ -77,7 +68,7 @@
 		  var index = parent.layer.getFrameIndex(window.name)
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-			  parent.layer.msg(JSON.stringify(data.field));
+			parent.layer.msg(JSON.stringify(data.field));
 		    parent.layer.close(index);
 		    return false;
 		  });

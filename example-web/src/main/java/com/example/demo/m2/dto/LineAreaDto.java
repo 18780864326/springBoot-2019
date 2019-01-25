@@ -60,5 +60,11 @@ public class LineAreaDto {
 	public void setList(List<MonitorInfoDto> list) {
 		this.list = list;
 	}
+	@Override
+	public String toString() {
+		return "LineAreaDto [lineAreaId=" + lineAreaId + ", lineAreaBuild=" + lineAreaBuild + ", lineAreaF=" + lineAreaF
+				+ ", lineAreaLine=" + lineAreaLine + ", lineAreaName=" + lineAreaName + ", lineAreaDescription="
+				+ lineAreaDescription + ", lineAreaProcess=" + lineAreaProcess + ", list=" + list + "]";
+	}
 	
 }

@@ -3,6 +3,7 @@ package com.example.demo.m2.controller;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
@@ -45,25 +46,57 @@ public class MonitorInfoController {
 	@RequestMapping("saveMonitorInfo")
 	public String saveMonitorInfo(MonitorInfoDto monitorInfoDto) {
 		Integer status = monitorInfoService.saveMonitorInfo(monitorInfoDto);
-		return "ok";
+		 MessageInfo messageInfo = new 	MessageInfo();
+		   messageInfo.setStatus(status);
+		   if(status==1) {
+			   messageInfo.setMsg("提交成功");
+		   }else {
+			   messageInfo.setMsg("提交失败");
+		   }
+			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+			return JSONObject.toJSONString(object);
 	}
 	
-	@RequestMapping("saveLineAreaInfo")
+	@RequestMapping(value="saveLineAreaInfo",method=RequestMethod.POST)
 	public String saveLineAreaInfo(LineAreaDto lineAreaDto) {
 		Integer status = monitorInfoService.saveLineAreaInfo(lineAreaDto);
-		return "ok";
+		 MessageInfo messageInfo = new 	MessageInfo();
+		   messageInfo.setStatus(status);
+		   if(status==1) {
+			   messageInfo.setMsg("提交成功");
+		   }else {
+			   messageInfo.setMsg("提交失败");
+		   }
+			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+			return JSONObject.toJSONString(object);
 	}
 	
 	@RequestMapping("updateLineAreaInfo")
 	public String updateLineAreaInfo(LineAreaDto lineAreaDto) {
 		Integer status = monitorInfoService.updateLineAreaInfo(lineAreaDto);
-		return "ok";
+		MessageInfo messageInfo = new 	MessageInfo();
+		   messageInfo.setStatus(status);
+		   if(status==1) {
+			   messageInfo.setMsg("操作成功");
+		   }else {
+			   messageInfo.setMsg("操作失败");
+		   }
+			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+			return JSONObject.toJSONString(object);
 	}
 	
 	@RequestMapping("updateMonitorInfo")
 	public String updateMonitorInfo(MonitorInfoDto monitorInfoDto) {
 		Integer status = monitorInfoService.updataMonitorInfo(monitorInfoDto);
-		return "ok";
+		MessageInfo messageInfo = new 	MessageInfo();
+		   messageInfo.setStatus(status);
+		   if(status==1) {
+			   messageInfo.setMsg("操作成功");
+		   }else {
+			   messageInfo.setMsg("操作失败");
+		   }
+			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+			return JSONObject.toJSONString(object);
 	}
 	@RequestMapping("getMonitorInfo")
 	public String getMonitorInfo(Long monitorAreaId) {

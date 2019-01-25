@@ -38,7 +38,7 @@
     </ul>
   </div>
   
-  <div class="layui-side layui-bg-black">
+  <div class="layui-side layui-bg-gray">
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
@@ -53,11 +53,17 @@
           </dl>
         </li>
          -->
-        <li class="layui-nav-item">
-          <a href="javascript:;">监控管理</a>
+        <li class="layui-nav-item " >
+          <a href="javascript:;">
+          <i class="layui-icon layui-icon-chart-screen" ></i>
+          监控管理</a>
           <dl class="layui-nav-child">
-           	<dd><a href="javascript:;" onclick=openPage('/monitor/lineArea')>监控区域信息</a></dd>
-            <dd><a href="javascript:;" onclick=openPage('/monitor/monitorInfo')>监控设备信息</a></dd>
+           	<dd><a href="javascript:;" onclick=openPage('/monitor/lineArea')>
+           	 <i class="layui-icon layui-icon-list" ></i>
+           	监控区域信息</a></dd>
+            <dd><a href="javascript:;" onclick=openPage('/monitor/monitorInfo')>
+             <i class="layui-icon layui-icon-list" ></i>
+            监控设备信息</a></dd>
           </dl>
         </li>
         <!--  

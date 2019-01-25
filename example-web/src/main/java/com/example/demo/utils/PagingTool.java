@@ -51,7 +51,6 @@ public class PagingTool  <T>{
             totalPageTemp = 1;
         }
         this.totalPage = totalPageTemp;
-        
         // 设置当前页数
         // 总页数小于当前页数，应将当前页数设置为总页数
         if(this.totalPage < this.currentPage) {
