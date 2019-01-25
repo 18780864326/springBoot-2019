@@ -147,16 +147,18 @@
 					  area: ['35rem', '35rem'],
 					  success: function(layero, index){
 					        var body = layer.getChildFrame('body', index);
-					        console.log(body) //得到iframe页的body内容
+					   	
 					        body.find('input').val('Hi，我是从父页来的')
 					    }
-
-				  
 					}); 
 				}
-	
 	});
 
+
+	$('.layui-btn[data-method=delete]').on('click', function(){
+		layer.msg('权限不足');
+		});
+	
 });         
 	</script>
 </body>
