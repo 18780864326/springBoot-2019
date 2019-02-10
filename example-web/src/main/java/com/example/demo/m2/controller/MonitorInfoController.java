@@ -43,7 +43,7 @@ public class MonitorInfoController {
 		return JSONObject.toJSONString(object);
 	}
 	
-	@RequestMapping("saveMonitorInfo")
+	@RequestMapping(value="saveMonitorInfo",method=RequestMethod.POST)
 	public String saveMonitorInfo(MonitorInfoDto monitorInfoDto) {
 		Integer status = monitorInfoService.saveMonitorInfo(monitorInfoDto);
 		 MessageInfo messageInfo = new 	MessageInfo();

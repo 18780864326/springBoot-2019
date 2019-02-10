@@ -10,7 +10,6 @@
 <form class="layui-form" action="">
 <div class="layui-fluid" >
 	<div class="layui-card" >
-		<div class="layui-card-header">监控信息增加</div>
 		<form class="layui-form" action="">
 		<div class="layui-form-item">
 	    	<label class="layui-form-label">播放路徑</label>
@@ -72,14 +71,23 @@
 </form>
     <script src="/demo/static/layui/layui.js"></script>
 	<script>
-	layui.use('form', function(){ 
-		  var form = layui.form;
+	layui.use('form', function(){
+		  var form = layui.form,$=layui.jquery;
 		  var index = parent.layer.getFrameIndex(window.name)
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-
-			parent.layer.msg(JSON.stringify(data.field));
-			parent.layer.close(index);
+			  layer.confirm('是否确认提交？', {
+				  btn: ['确认', '取消']
+				 }, function(index){
+					 $.post("/demo/monitorArea/saveMonitorInfo"
+							 ,data.field
+							 ,function(result){
+					 			layer.msg(result);
+								parent.first_table.reload();	//刷新父页面的数据表格
+								parent.layer.close(index);//删除当前弹框
+						 });	
+				 }, function(index){
+				 });
 		    return false;
 		  });
 		});

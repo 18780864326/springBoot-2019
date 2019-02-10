@@ -40,16 +40,16 @@
 			      </div>
       
 			  <div class="layui-card-body">
-			  	<div class="layui-btn-container">
+			  	<div class="layui-btn-container" data-method="add">
 			  			 <button class="layui-btn" >
 		          		<i class="layui-icon layui-icon-add-1 "></i>
 		        		  新增
 		         		 </button>
-		          <button class="layui-btn " >
+		          <button class="layui-btn " data-method="edit">
 		              <i class="layui-icon layui-icon-edit "></i>
 		          			编辑
 		          </button>
-		          <button class="layui-btn " >
+		          <button class="layui-btn " data-method="delete">
 		              <i class="layui-icon layui-icon-delete "></i>
 		         		 删除
 		          </button>
@@ -61,6 +61,8 @@
     <script src="/demo/static/layui/layui.js"></script>
 
 	<script>
+	var dataId ; //全局变量 选择行数据ID
+	var first_table;
 		layui.use('table', function(){
 			  var table = layui.table
 			  ,form = layui.form
@@ -68,7 +70,7 @@
 			  ,layer = layui.layer;   	 
 		//执行一个 table 实例
 		  table.render({
-		    elem: '#demo'
+		    elem: '#monitorInfoTest'
 		    ,height: 517
 		    ,url: '/demo/monitorArea/queryMonitorInfo' //数据接口
 		    ,title: '用户表'
@@ -117,24 +119,56 @@
 				  content: '/demo/static/html/monitor/monitorInfo_add.html',
 				  btn: '关闭',
 				  anim: 5,
-				  area: ['35rem', '50rem']
+				  area: ['35rem', '35rem']
 				}); 
 		});
-
+	
 		$('.layui-btn[data-method=edit]').on('click', function(){
-		layer.open({
-			//这里content是一个URL,如果你不想让iframe出现滚动条,
-			//你还可以content: ['http://sentsin.com', 'no']
-			  type: 2, 
-			  id: 'monitorArea_edit',//防止重复
-			  offset: 'auto',
-			  content: '/demo/static/html/monitor/monitorInfo_edit.html',
-			  btn: '关闭',
-			  anim: 5,
-			  area: ['32rem', '50rem']
-			}); 
+			var checkObj = table.checkStatus('monitorInfoTest');
+			if(checkObj.data.length<1){
+				layer.msg('请先选中一行');
+				}else if( checkObj.data.length>1){
+					layer.msg('只能选中一行');
+				}
+				else{
+					dataId = checkObj.data[0].lineAreaId;
+					layer.open({
+						//这里content是一个URL,如果你不想让iframe出现滚动条,
+						//你还可以content: ['http://sentsin.com', 'no']
+						  type: 2, 
+						  title:'線別区域信息修改',
+						  id: 'monitorArea_edit',//防止重复
+						  offset: 'auto',
+						  content: '	/demo/static/html/monitor/monitorInfo_edit.html',
+						  btn: '关闭',
+						  anim: 5,
+						  area: ['35rem', '35rem']
+						}); 
+					}
 		});
 	   
+		$('.layui-btn[data-method=delete]').on('click', function(){
+			var checkObj = table.checkStatus('monitorInfoTest');
+			if(checkObj.data.length<1){
+				layer.msg('请先选中一行');
+				}else if( checkObj.data.length>1){
+					layer.msg('只能选中一行');
+				}
+				else{
+					dataId = checkObj.data[0].lineAreaId;
+					layer.confirm('是否删除该条数据？', {
+						  btn: ['确认', '取消']
+						 }, function(index){
+							 $.post("/demo/monitorArea/deleteMonitorInfo"
+									 ,{"lineAreaId":dataId}
+									 ,function(result){
+							 			layer.msg("删除成功");
+							 			first_table.reload();
+								 });
+						 }, function(index){
+						 });
+				}
+			});
 }); 
 	</script>
 </body>

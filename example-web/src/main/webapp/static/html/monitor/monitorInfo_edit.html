@@ -10,7 +10,6 @@
 <form class="layui-form"   lay-filter="monitorInfo_edit" action="">
 <div class="layui-fluid" >
 	<div class="layui-card" >
-		<div class="layui-card-header">监控信息增加</div>
 		<form class="layui-form" action="">
 		<div class="layui-form-item">
 	    	<label class="layui-form-label">播放路徑</label>
@@ -62,7 +61,8 @@
 		</div>	
 	</div>
  </div>	
-  
+  		<!--  hidden  -->
+ 	<input type="hidden" name="monitorId"   autocomplete="off" class="layui-input">
    <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
@@ -74,13 +74,34 @@
 	<script>
 	layui.use('form', function(){
 		  var form = layui.form;
+		  var $ =layui.$;
 		  var index = parent.layer.getFrameIndex(window.name)
+		  var retults;
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-			  parent.layer.msg(JSON.stringify(data.field));
-		    parent.layer.close(index);
-		    return false;
+			  layer.confirm('是否确认提交？', {
+				  btn: ['确认', '取消']
+				 }, function(index){
+					 $.post("/demo/monitorArea/updateMonitorInfo"
+							 ,data.field
+							 ,function(result){
+					 			layer.msg(result.msg);
+					 			parent.first_table.reload();
+								parent.layer.close(index);
+						 });
+				 }, function(index){
+				 });
+			  return false;
 		  });
+		  $.ajax({
+	            type:"get",
+	            url:"/demo/monitorArea/getMonitorInfo",
+	            dataType:"json",
+	            data: {"getMonitorInfo":parent.dataId},
+	           success:function(retult){
+	        	   form.val("monitorInfo_edit",retult.data);
+	           }
+	        });
 		});
 	</script>
 </body>
