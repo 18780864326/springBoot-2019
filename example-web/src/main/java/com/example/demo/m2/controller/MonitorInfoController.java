@@ -125,4 +125,14 @@ public class MonitorInfoController {
 			JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
 			return JSONObject.toJSONString(obj);
 	}
+	
+	@RequestMapping("deleteLineAreaInfo")
+	public void deleteLineAreaInfo(Long lineAreaId) {
+		monitorInfoService.deleteLineAreaInfo(lineAreaId);
+	}
+	
+	@RequestMapping("deleteMonitorInfo")
+	public void deleteMonitorInfo(Long monitorAreaId) {
+		monitorInfoService.deleteMonitorInfo(monitorAreaId);
+	}
 }

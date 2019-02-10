@@ -36,6 +36,21 @@ public interface MonitorInfoService {
 	public Integer updateLineAreaInfo(LineAreaDto lineAreaDto);
 	
 	/**
+	* @Title: deleteLineAreaInfo 
+	* @Description:删除数据
+	* @param id
+	 */
+	public void deleteLineAreaInfo(Long id);
+	
+	/**
+	 * 
+	* @Title: deleteMonitorInfo 
+	* @Description:删除数据
+	* @param id
+	 */
+	public void deleteMonitorInfo(Long  id);
+	
+	/**
 	 *  分页查询监控设备信息
 	 * @param dto 
 	 * @param pagingSize

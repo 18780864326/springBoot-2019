@@ -65,7 +65,6 @@
 	<script>
 	layui.use('form', function(){
 		  var form = layui.form,$=layui.jquery;
-		  
 		  var index = parent.layer.getFrameIndex(window.name)
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
@@ -76,9 +75,8 @@
 							 ,data.field
 							 ,function(result){
 					 			layer.msg(result);
-								if(result.status == 1){
-									parent.layer.close(index);
-								}
+								parent.first_table.reload();	
+								parent.layer.close(index);
 						 });	
 				 }, function(index){
 				 });

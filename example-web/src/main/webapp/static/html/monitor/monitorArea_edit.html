@@ -53,7 +53,9 @@
 		</div>	
 	</div>
  </div>	
- <!--  hidden  -->
+ 	<!--  hidden  -->
+ 	<input  type="hidden"  name="lineAreaId" class="layui-input">
+ 	
  	<input type="hidden" name="lineAreaId"   autocomplete="off" class="layui-input">
    <div class="layui-form-item">
     <div class="layui-input-block">
@@ -66,23 +68,34 @@
 	<script>
 	layui.use('form', function(){
 		  var form = layui.form;
+		  var $ =layui.$;
 		  var index = parent.layer.getFrameIndex(window.name)
+		  var retults;
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-			parent.layer.msg(JSON.stringify(data.field));
-		    parent.layer.close(index);
-		    return false;
+			  layer.confirm('是否确认提交？', {
+				  btn: ['确认', '取消']
+				 }, function(index){
+					 $.post("/demo/monitorArea/updateLineAreaInfo"
+							 ,data.field
+							 ,function(result){
+					 			layer.msg(result.msg);
+					 			parent.first_table.reload();
+								parent.layer.close(index);
+						 });
+				 }, function(index){
+				 });
+			  return false;
 		  });
-
-		  form.val("lineArea_edit", {
-			  "lineAreaBuild": "贤心" // "name": "value"
-			  ,"lineAreaF": "xxxx"
-			  ,"lineAreaName": 'xxxxx'
-			  ,"lineAreaLine": 'xxxxx'
-			  ,"lineAreaDescription": "xxxxx"
-			  ,"lineAreaProcess": "xxxxxxx"
-			})
-		  
+		  $.ajax({
+	            type:"get",
+	            url:"/demo/monitorArea/getLineAreaInfo",
+	            dataType:"json",
+	            data: {"lineAreaId":parent.dataId},
+	           success:function(retult){
+	        	   form.val("lineArea_edit",retult.data);
+	           }
+	        });
 		});
 	</script>
 </body>

@@ -175,8 +175,18 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 		  LineAreaDto lineAreaDto = null ;
 		 if(lineArea != null) {
 			 lineAreaDto = new LineAreaDto();
-			 BeanUtils.copyProperties(lineAreaDto,lineArea );
+			 BeanUtils.copyProperties(lineArea,lineAreaDto);
 		 }
 		 return lineAreaDto;
+	}
+
+	@Override
+	public void deleteLineAreaInfo(Long id) {
+		lineAreaRepository.deleteById(id);
+	}
+
+	@Override
+	public void deleteMonitorInfo(Long id) {
+		monitorAreaRepository.deleteById(id);
 	}
 }	
