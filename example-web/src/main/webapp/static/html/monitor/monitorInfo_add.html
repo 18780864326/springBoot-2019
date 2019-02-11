@@ -103,21 +103,22 @@
 		    return false;
 		  });
 
-		  $('.layui-btn[method=select_lineArea]').on('click', function(){
-				layer.open({
-									  type: 2, 
-									  title:'监控设备信息增加',
-									  id: 'monitorArea_add',//防止重复
-									  offset: 'auto',
-									  content: '/demo/static/html/monitor/monitorInfo_select_lineArea.html',
-									  btn: '关闭',
-									  anim: 5,
-									  maxmin: true,
-									  area: ['45rem', '40rem'],
-									  end:function(){
-										  }
-									}); 
-			  })
+
+		   $('.layui-btn[method=select_lineArea]').on('click', function(){
+			   parent.layer.open({
+					  type: 2, 
+					  title:'监控设备信息增加',
+					  id: 'monitorArea_select',//防止重复
+					  offset: 'auto',
+					  content: '/demo/static/html/monitor/monitorInfo_select_lineArea.html',
+					  btn: '关闭',
+					  anim: 5,
+					  maxmin: true,
+					  area: ['73rem', '45rem'],
+					  end:function(){
+						  }
+					}); 
+			   });
 });
 	</script>
 </body>

@@ -117,8 +117,10 @@
 								  btn: ['确认', '取消']
 								 }, function(index){
 									 var index2 = parent.layer.getFrameIndex(window.name)
-									parent$('input[name=monitorAreaId]').attr('value',table_lineAreaId); 
-									 parent$('#lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
+									 parent.input_monitorAreaId=table_lineAreaId;
+									 parent.span_lineAreaDescription=checkObj.data[0].lineAreaDescription;
+									//parent$('input[name=monitorAreaId]').attr('value',table_lineAreaId); 
+									//parent$('#lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
 									parent.layer.close(index2);
 								 }, function(index){
 								 });
