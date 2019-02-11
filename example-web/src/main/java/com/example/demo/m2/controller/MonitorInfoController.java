@@ -108,7 +108,7 @@ public class MonitorInfoController {
 		}
 		messageInfo.setStatus(status);
 		messageInfo.setData(monitorInfoDto);
-		JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
+		JSONObject obj = (JSONObject) JSONObject.toJSON(monitorInfoDto);
 		return JSONObject.toJSONString(obj);
 	}
 	

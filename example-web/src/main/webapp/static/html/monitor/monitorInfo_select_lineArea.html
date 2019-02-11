@@ -40,18 +40,10 @@
       
 			  <div class="layui-card-body">
 			  	<div class="layui-btn-container">
-			  			 <button class="layui-btn"   data-method="add">
+			  			 <button class="layui-btn"   data-method="select">
 		          		<i class="layui-icon layui-icon-add-1 "></i>
-		        		  新增
+		        		 选择
 		         		 </button>
-		          <button class="layui-btn "  data-method="edit">
-		              <i class="layui-icon layui-icon-edit "></i>
-		          			编辑
-		          </button>
-		          <button class="layui-btn "  data-method="delete">
-		              <i class="layui-icon layui-icon-delete "></i>
-		         		 删除
-		          </button>
 		        	</div>
 			<table class="layui-hide" id="dataTable" lay-filter="intfData"></table>
 	  </div>
@@ -60,13 +52,14 @@
     <script src="/demo/static/layui/layui.js"></script>
 
 	<script>
-		var dataId ; //全局变量 选择行数据ID
+		var table_lineAreaId ; //全局变量 选择行数据ID
 		var first_table;
 		layui.use(['table', 'layer'], function(){
 		  var table = layui.table
 		  ,form = layui.form
 		  ,$ = layui.jquery
 		  ,layer = layui.layer;
+		  var parent$ = window.parent.layui.jquery;
 		//执行一个 table 实例
 		  first_table = table.render({
 		    elem: '#dataTable'
@@ -111,67 +104,26 @@
 		  });
 	 });
 	 
-	$('.layui-btn[data-method=add]').on('click', function(){
-				layer.open({
-					//这里content是一个URL,如果你不想让iframe出现滚动条,
-					//你还可以content: ['http://sentsin.com', 'no']
-					  type: 2, 
-					  title:'線別区域信息增加',
-					  id: 'monitorArea_add',//防止重复弹窗
-					  offset: 'auto',
-					  content: '/demo/static/html/monitor/monitorArea_add.html',
-					  btn: '关闭',
-					  anim: 5,
-					  area: ['35rem', '35rem']
-					}); 
-		});
-
-	$('.layui-btn[data-method=edit]').on('click', function(){
-		var checkObj = table.checkStatus('lineAreaTest');
-		if(checkObj.data.length<1){
-			layer.msg('请先选中一行');
-			}else if( checkObj.data.length>1){
-				layer.msg('只能选中一行');
-			}
-			else{
-				dataId = checkObj.data[0].lineAreaId;
-				layer.open({
-					//这里content是一个URL,如果你不想让iframe出现滚动条,
-					//你还可以content: ['http://sentsin.com', 'no']
-					  type: 2, 
-					  title:'線別区域信息修改',
-					  id: 'monitorArea_edit',//防止重复
-					  offset: 'auto',
-					  content: '/demo/static/html/monitor/monitorArea_edit.html',
-					  btn: '关闭',
-					  anim: 5,
-					  area: ['35rem', '35rem']
-					}); 
-				}
-	});
-	
-	$('.layui-btn[data-method=delete]').on('click', function(){
-		var checkObj = table.checkStatus('lineAreaTest');
-		if(checkObj.data.length<1){
-			layer.msg('请先选中一行');
-			}else if( checkObj.data.length>1){
-				layer.msg('只能选中一行');
-			}
-			else{
-				dataId = checkObj.data[0].lineAreaId;
-				layer.confirm('是否删除该条数据？', {
-					  btn: ['确认', '取消']
-					 }, function(index){
-						 $.post("/demo/monitorArea/deleteLineAreaInfo"
-								 ,{"lineAreaId":dataId}
-								 ,function(result){
-						 			layer.msg("删除成功");
-						 			first_table.reload();
-							 });
-					 }, function(index){
-					 });
-			}
-		});
+	$('.layui-btn[data-method=select]').on('click', function(){
+					var checkObj = table.checkStatus('lineAreaTest');
+					if(checkObj.data.length<1){
+						layer.msg('请先选中一行');
+						}else if( checkObj.data.length>1){
+							layer.msg('只能选中一行');
+						}
+						else{
+							table_lineAreaId = checkObj.data[0].lineAreaId;
+							layer.confirm('是否该条数据？', {
+								  btn: ['确认', '取消']
+								 }, function(index){
+									 var index2 = parent.layer.getFrameIndex(window.name)
+									parent$('input[name=monitorAreaId]').attr('value',table_lineAreaId); 
+									 parent$('#lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
+									parent.layer.close(index2);
+								 }, function(index){
+								 });
+						}
+				});
 
 });         
 	</script>

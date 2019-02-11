@@ -14,23 +14,12 @@
 				 
 			        <div class="layui-form-item" >
 			          <div class="layui-inline" >
-			            <label class="layui-form-label">参数一</label>
+			            <label class="layui-form-label">制程</label>
 			            <div class="layui-input-inline">
-			              <input type="text" name="processdefid" placeholder="请输入" autocomplete="off" class="layui-input">
+			              <input type="text" name="lineAreaProcess" placeholder="请输入" autocomplete="off" class="layui-input">
 			            </div>
 			          </div>
-			          <div class="layui-inline">
-			            <label class="layui-form-label">参数二</label>
-			            <div class="layui-input-inline">
-			              <input type="text" name="processdefname" placeholder="请输入" autocomplete="off" class="layui-input">
-			            </div>
-			          </div>
-			          <div class="layui-inline">
-			            <label class="layui-form-label">参数三</label>
-			            <div class="layui-input-inline">
-			              <input type="text" name="tenantId" placeholder="请输入" autocomplete="off" class="layui-input">
-			            </div>
-			          </div>
+			         
 			          <div class="layui-inline">
 			            <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-app-contlist-search">
 			              <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>搜索
@@ -40,8 +29,8 @@
 			      </div>
       
 			  <div class="layui-card-body">
-			  	<div class="layui-btn-container" data-method="add">
-			  			 <button class="layui-btn" >
+			  	<div class="layui-btn-container">
+			  			 <button class="layui-btn"  data-method="add">
 		          		<i class="layui-icon layui-icon-add-1 "></i>
 		        		  新增
 		         		 </button>
@@ -54,31 +43,35 @@
 		         		 删除
 		          </button>
 		        	</div>
-			<table class="layui-hide" id="demo" lay-filter="intfData"></table>
+			<table class="layui-hide" id=dataTable lay-filter="intfData"></table>
 	  </div> 
 	</div>
   </div>	
     <script src="/demo/static/layui/layui.js"></script>
 
 	<script>
-	var dataId ; //全局变量 选择行数据ID
-	var first_table;
+	var table_monitorId ; //全局变量 选择行数据ID
+	var monitorInfo_layer;
+	var monitorInfo_table;
 		layui.use('table', function(){
 			  var table = layui.table
 			  ,form = layui.form
 			  ,$ = layui.jquery
-			  ,layer = layui.layer;   	 
+			  ,layer = layui.layer;  
 		//执行一个 table 实例
-		  table.render({
-		    elem: '#monitorInfoTest'
+		  monitorInfo_table = table.render({
+		    elem: '#dataTable'
+		   	 ,id:'monitorInfoTest'
 		    ,height: 517
 		    ,url: '/demo/monitorArea/queryMonitorInfo' //数据接口
-		    ,title: '用户表'
+		    ,title: '信息表'
 		    ,page: true //开启分页
 		    ,totalRow: true //开启合计行
 		    ,cols: [[ //表头
-		      {type: 'checkbox', fixed: 'left'}
-		      ,{field: 'monitorId', title: 'ID', width:'4%'}
+		      {type: 'radio'}
+		      ,{title: '序号'  ,width:'4%', type:'numbers'}
+		      ,{field: 'monitorId', title: 'id', hide:true}
+		      ,{field: 'monitorAreaId', title: 'id', hide:true}
 		      ,{field: 'monitorPlay', title: '播放路徑參數'}
 		      ,{field: 'monitorDescription', title: '鏡頭描述', width: 200}
 		      ,{field: 'monitorNvrIp', title: 'NVR_IP', width: 200}
@@ -104,7 +97,7 @@
 	form.on('submit(LAY-app-contlist-search)', function(data){
 		var field = data.field;
 		//执行重载
-		table.reload('intfData', {
+		table.reload('monitorInfoTest', {
 		    where: field
 		  });
 	 });
@@ -114,12 +107,14 @@
 				//这里content是一个URL,如果你不想让iframe出现滚动条,
 				//你还可以content: ['http://sentsin.com', 'no']
 				  type: 2, 
+				  title:'监控设备信息增加',
 				  id: 'monitorArea_add',//防止重复
 				  offset: 'auto',
 				  content: '/demo/static/html/monitor/monitorInfo_add.html',
 				  btn: '关闭',
 				  anim: 5,
-				  area: ['35rem', '35rem']
+				  maxmin: true,
+				  area: ['45rem', '40rem']
 				}); 
 		});
 	
@@ -131,7 +126,7 @@
 					layer.msg('只能选中一行');
 				}
 				else{
-					dataId = checkObj.data[0].lineAreaId;
+					table_monitorId = checkObj.data[0].monitorId;
 					layer.open({
 						//这里content是一个URL,如果你不想让iframe出现滚动条,
 						//你还可以content: ['http://sentsin.com', 'no']
@@ -142,7 +137,8 @@
 						  content: '	/demo/static/html/monitor/monitorInfo_edit.html',
 						  btn: '关闭',
 						  anim: 5,
-						  area: ['35rem', '35rem']
+						  maxmin: true,
+						  area: ['38rem', '40rem']
 						}); 
 					}
 		});
@@ -155,15 +151,15 @@
 					layer.msg('只能选中一行');
 				}
 				else{
-					dataId = checkObj.data[0].lineAreaId;
+					table_monitorId = checkObj.data[0].monitorId;
 					layer.confirm('是否删除该条数据？', {
 						  btn: ['确认', '取消']
 						 }, function(index){
 							 $.post("/demo/monitorArea/deleteMonitorInfo"
-									 ,{"lineAreaId":dataId}
+									 ,{"monitorAreaId":table_monitorId}
 									 ,function(result){
 							 			layer.msg("删除成功");
-							 			first_table.reload();
+							 			monitorInfo_table.reload();
 								 });
 						 }, function(index){
 						 });

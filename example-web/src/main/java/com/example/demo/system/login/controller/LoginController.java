@@ -1,12 +1,12 @@
 package com.example.demo.system.login.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.TestUser;
 import com.example.demo.system.login.dto.LoginDto;
@@ -21,24 +21,26 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String loginSystem(LoginDto loginDto) {
-//			TestUser user  =	loginService.findUserInfoByDto(loginDto);
+	public String loginSystem(LoginDto loginDto,HttpSession session) {
+			TestUser user  =	loginService.findUserInfoByDto(loginDto);
 			MessageInfo msg = new MessageInfo();
 			msg.setStatus(1);
 			msg.setMsg("登录成功");
-//			if(user != null) {
-//				msg.setStatus(1);
-//				msg.setMsg("登录成功");
-//			}else {
-//				msg.setStatus(0);
-//				msg.setMsg("登录失败，账户或者密码错误");
-//			}
+			if(user != null) {
+				session.setAttribute("userName", user.getUserName());
+				msg.setStatus(1);
+				msg.setMsg("登录成功");
+			}else {
+				msg.setStatus(0);
+				msg.setMsg("登录失败，账户或者密码错误");
+			}
 			String str = JSONObject.toJSONString(msg).toString();
 		return str;	
 	}
 	@RequestMapping(value="/logOut")
-	public ModelAndView  logOut(LoginDto loginDto, ModelAndView  mv) { 
+	public ModelAndView  logOut(LoginDto loginDto, ModelAndView  mv,HttpSession session) { 
 		int status = loginService.logOut();
+		session.setAttribute("userName", null);
 			if(status ==1) {
 				
 			}

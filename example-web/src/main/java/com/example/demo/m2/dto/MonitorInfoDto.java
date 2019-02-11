@@ -70,6 +70,12 @@ public class MonitorInfoDto  extends OraclePageDto {
 	public void setMonitorCh(Integer monitorCh) {
 		this.monitorCh = monitorCh;
 	}
+	public Long getMonitorAreaId() {
+		return monitorAreaId;
+	}
+	public Integer getMonitorCh() {
+		return monitorCh;
+	}
 	@Override
 	public String toString() {
 		return "MonitorInfoDto [monitorId=" + monitorId + ", monitorPlay=" + monitorPlay + ", monitorAreaId="

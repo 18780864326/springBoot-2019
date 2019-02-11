@@ -57,8 +57,7 @@
  	<input type="hidden" name="lineAreaId"   autocomplete="off" class="layui-input">
    <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
     </div>
   </div>
 </form>
@@ -67,20 +66,24 @@
 	layui.use('form', function(){
 		  var form = layui.form;
 		  var $ =layui.$;
-		  var index = parent.layer.getFrameIndex(window.name)
 		  var retults;
 		  //监听提交
-		  form.on('submit(formDemo)', function(data){
+		  form.on('submit(formDemo)', function(datas){
+	    	   var index = parent.layer.getFrameIndex(window.name)
 			  layer.confirm('是否确认提交？', {
 				  btn: ['确认', '取消']
 				 }, function(index){
-					 $.post("/demo/monitorArea/updateLineAreaInfo"
-							 ,data.field
-							 ,function(result){
-					 			layer.msg(result.msg);
+					  $.ajax({
+				            type:"post",
+				            url:"/demo/monitorArea/updateLineAreaInfo",
+				            dataType:"json",
+				            data:datas.field,
+				           success:function(result){
+				        	   layer.msg(result.msg);
 					 			parent.first_table.reload();
 								parent.layer.close(index);
-						 });
+				           }
+				        });
 				 }, function(index){
 				 });
 			  return false;
@@ -90,8 +93,8 @@
 	            url:"/demo/monitorArea/getLineAreaInfo",
 	            dataType:"json",
 	            data: {"lineAreaId":parent.dataId},
-	           success:function(retult){
-	        	   form.val("lineArea_edit",retult.data);
+	           success:function(result){
+	        	   form.val("lineArea_edit",result.data);
 	           }
 	        });
 		});

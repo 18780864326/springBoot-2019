@@ -57,7 +57,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 				"          from MONITOR_AREA t, LINE_AREA a\r\n" + 
 				"         where t.monitor_area_id = a.line_area_id(+)) t\r\n" + 
 				" where 1 = 1\r\n" ;
-			if(lineAreaProcess != null || "".equals(lineAreaProcess)) {
+			if(lineAreaProcess != null && !"".equals(lineAreaProcess)) {
 				sql += " and upper(t.line_area_process) like upper('%"+lineAreaProcess+"%') " ;
 			}
 			Integer countNumber = monitorAreaRepository.countBySqlToInteger(sql);
@@ -77,7 +77,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 		 pagingTool.setCurrentPage(pageIndex);
 		 String lineAreaProcess = lineAreaDto.getLineAreaProcess(); //条件参数 制程
 		 String lineAreaBuild = lineAreaDto.getLineAreaBuild();//条件 参数 楼栋
-//		 String lineAreaF = lineAreaDto.getLineAreaF();//条件 参数 楼层
+		 String lineAreaF = lineAreaDto.getLineAreaF();//条件 参数 楼层
 //		 String lineAreaLine = lineAreaDto.getLineAreaLine();//条件 参数 区别/模组
 		 
 		String sql = 
@@ -90,9 +90,12 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 				"       t.line_area_process\r\n" + 
 				"  from LINE_AREA t\r\n" +
 				" where  1=1 ";
-		if(lineAreaBuild != null || "".equals(lineAreaBuild)) {
-			sql += " and t.line_area_build = upper('"+lineAreaBuild+"')\r\n";
-		}if(lineAreaProcess != null || "".equals(lineAreaProcess)) {
+		if(lineAreaF != null && !"".equals(lineAreaF)) {
+			sql += " and t.line_area_f = upper('"+lineAreaF+"')\r\n";
+		}
+		if(lineAreaBuild != null && !"".equals(lineAreaBuild)) {
+			sql += " and t.line_area_build like upper('%"+lineAreaBuild+"%')\r\n";
+		}if(lineAreaProcess != null && !"".equals(lineAreaProcess)) {
 			sql += " and upper(t.line_area_process) like upper('%"+lineAreaProcess+"%') " ;
 		}
 		Integer countNumber = monitorAreaRepository.countBySqlToInteger(sql);
@@ -171,7 +174,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 
 	@Override
 	public LineAreaDto queryLineAreaInfoInfoById(Long lineAreaId) {
-		 LineArea lineArea = lineAreaRepository.getOne(lineAreaId);
+		 LineArea lineArea = lineAreaRepository.findBylineAreaId(lineAreaId);
 		  LineAreaDto lineAreaDto = null ;
 		 if(lineArea != null) {
 			 lineAreaDto = new LineAreaDto();
