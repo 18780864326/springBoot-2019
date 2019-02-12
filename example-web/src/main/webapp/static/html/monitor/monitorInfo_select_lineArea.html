@@ -112,15 +112,15 @@
 							layer.msg('只能选中一行');
 						}
 						else{
-							table_lineAreaId = checkObj.data[0].lineAreaId;
 							layer.confirm('是否该条数据？', {
 								  btn: ['确认', '取消']
 								 }, function(index){
 									 var index2 = parent.layer.getFrameIndex(window.name)
-									 parent.input_monitorAreaId=table_lineAreaId;
-									 parent.span_lineAreaDescription=checkObj.data[0].lineAreaDescription;
-									//parent$('input[name=monitorAreaId]').attr('value',table_lineAreaId); 
-									//parent$('#lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
+									 //获取兄弟iframe 对象  
+									 var frameId=parent.document.getElementById('monitorArea_edit').getElementsByTagName("iframe")[0].id;
+									var brotherIframe$ = parent.window[frameId].layui.jquery;
+									   brotherIframe$('input[name=monitorAreaId]').attr('value', checkObj.data[0].lineAreaId); 
+									   brotherIframe$('#span_lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
 									parent.layer.close(index2);
 								 }, function(index){
 								 });

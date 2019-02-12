@@ -63,7 +63,7 @@
 		<div class="layui-form-item">
 		    <label class="layui-form-label">所属线区</label>
 		    <div class="layui-input-block">
-		       <span id='lineAreaInfo'> </span>
+		       <span id='span_lineAreaInfo'> </span>
 		      <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger"  method="select_lineArea">更改</button>
 		    </div>
 		  </div>
@@ -123,8 +123,12 @@
 			   	            url:"/demo/monitorArea/getLineAreaInfo",
 			   	            dataType:"json",
 			   	            data: {"lineAreaId":retult.monitorAreaId},
-			   	           success:function(retult2){
-				   	        	 $('#lineAreaInfo').html(retult2.data.lineAreaDescription);
+			   	           	success:function(retult2){
+					   	           if(retult2.status == 1){
+						   	        	 $('#span_lineAreaInfo').html(retult2.data.lineAreaDescription);
+						   	           }else {
+						   	          	$('#span_lineAreaInfo').html("无");
+							   	           }	
 				   	           }
 		   	        });
 	           }
@@ -142,13 +146,10 @@
 					  maxmin: true,
 					  area: ['73rem', '45rem'],
 					  end:function(){
-						  //$('input[name=monitorAreaId]').attr('value', parent.input_monitorAreaId); 
-						  //$('#lineAreaInfo').html(span_lineAreaDescription);
 						  }
 					}); 
 			   });
 });
-
 	</script>
 </body>
 </html>

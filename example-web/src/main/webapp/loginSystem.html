@@ -10,7 +10,7 @@
 	  	  <link rel="stylesheet"  href="/demo/static/layui/css/login.css"  media="all">
 	  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
-<body>
+<body  >
 <div class="layadmin-user-login " id="LAY-user-login" >
   <div class="layadmin-user-login-main">
     <div class="layadmin-user-login-box layadmin-user-login-header">
@@ -68,7 +68,8 @@
 	 <script type="text/javascript" src="/demo/static/js/jquery-3.3.1.min.js"></script>
 	 <script type="text/javascript">
 	  	layui.use('form', function(){
-			  var form = layui.form;
+			  var form = layui.form,
+			  		$=layui.jquery;
 			  form.render();
 			  //监听提交
 			  form.on('submit(LAY-user-login-submit)', function(data){
@@ -98,7 +99,17 @@
 			   // layer.msg(JSON.stringify(data.field));
 			    return false;
 			  });
+
+			//开启回车事件   监听到了 激活登录按钮
+			  $(document).keydown(function (e) {
+				  if (e.keyCode === 13) {
+				 	 $('[lay-filter=LAY-user-login-submit]').trigger("click");
+				  }
 			});
+			  
+});
+
+		
 	  	 layui.define("form",function(e){var t=layui.$,i=(layui.layer,layui.laytpl,layui.setter,layui.view,layui.admin,layui.form),a=t("body");i.verify({nickname:function(e,t){return new RegExp("^[a-zA-Z0-9_一-龥\\s·]+$").test(e)?/(^\_)|(\__)|(\_+$)/.test(e)?"用户名首尾不能出现下划线'_'":/^\d+\d+\d$/.test(e)?"用户名不能全为数字":void 0:"用户名不能有特殊字符"},pass:[/^[\S]{4,12}$/,"密码必须6到12位，且不能出现空格"]}),a.on("click","#LAY-user-get-vercode",function(){t(this);this.src="https://www.oschina.net/action/user/captcha?t="+(new Date).getTime()}),e("user",{})});
 		 </script>
 </body>
