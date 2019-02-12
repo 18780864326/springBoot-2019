@@ -145,6 +145,9 @@
 					  anim: 5,
 					  maxmin: true,
 					  area: ['73rem', '45rem'],
+					  success: function(layero, index){
+						  $(layero).find("iframe")[0].contentWindow.iframe_name = "monitorArea_edit";
+						  },
 					  end:function(){
 						  }
 					}); 
