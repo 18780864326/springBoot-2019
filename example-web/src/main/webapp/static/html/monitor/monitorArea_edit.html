@@ -73,15 +73,16 @@
 			  layer.confirm('是否确认提交？', {
 				  btn: ['确认', '取消']
 				 }, function(index){
-					  $.ajax({
+					 $.ajax({
 				            type:"post",
-				            url:"/demo/monitorArea/updateLineAreaInfo",
+				            url:"/MonitorSystem/monitorArea/updateLineAreaInfo",
 				            dataType:"json",
 				            data:datas.field,
 				           success:function(result){
-				        	   layer.msg(result.msg);
-					 			parent.first_table.reload();
-								parent.layer.close(index);
+				        	   var iframe_index = parent.layer.getFrameIndex(window.name);
+				        	   	parent.layer.msg(result.msg);
+					 			parent.lineArea_table.reload();
+								parent.layer.close(iframe_index);
 				           }
 				        });
 				 }, function(index){

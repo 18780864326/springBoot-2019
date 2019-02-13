@@ -93,9 +93,10 @@
 					 $.post("/demo/monitorArea/saveMonitorInfo"
 							 ,data.field
 							 ,function(result){
-					 			layer.msg(result);
+								 var iframe_index = parent.layer.getFrameIndex(window.name);
+					        	  parent.layer.msg(result.msg);
 								parent.monitorInfo_table.reload();	//刷新父页面的数据表格
-								parent.layer.close(index);//删除当前弹框
+								parent.layer.close(iframe_index);//删除当前弹框
 						 });	
 				 }, function(index2){
 				 });

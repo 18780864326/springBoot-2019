@@ -65,19 +65,23 @@
 	<script>
 	layui.use('form', function(){
 		  var form = layui.form,$=layui.jquery;
-		  var index = parent.layer.getFrameIndex(window.name)
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
 			  layer.confirm('是否确认提交？', {
 				  btn: ['确认', '取消']
 				 }, function(index){
-					 $.post("/demo/monitorArea/saveLineAreaInfo"
-							 ,data.field
-							 ,function(result){
-					 			layer.msg(result);
-								parent.first_table.reload();	
-								parent.layer.close(index);
-						 });	
+					 $.ajax({
+				            type:"post",
+				            url:"/MonitorSystem/monitorArea/saveLineAreaInfo",
+				            dataType:"json",
+				            data:data.field,
+				           success:function(result){
+				        	   var iframe_index = parent.layer.getFrameIndex(window.name);
+				        	   	parent.layer.msg(result.msg);
+					 			parent.lineArea_table.reload();
+								parent.layer.close(iframe_index);
+				           }
+				        });
 				 }, function(index){
 				 });
 		    return false;

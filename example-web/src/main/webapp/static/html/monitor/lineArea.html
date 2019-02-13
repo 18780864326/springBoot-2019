@@ -61,14 +61,14 @@
 
 	<script>
 		var dataId ; //全局变量 选择行数据ID
-		var first_table;
+		var lineArea_table;
 		layui.use(['table', 'layer'], function(){
 		  var table = layui.table
 		  ,form = layui.form
 		  ,$ = layui.jquery
 		  ,layer = layui.layer;
 		//执行一个 table 实例
-		  first_table = table.render({
+		  lineArea_table = table.render({
 		    elem: '#dataTable'
 			 ,id:'lineAreaTest'
 		    ,height: 513
@@ -166,7 +166,7 @@
 								 ,{"lineAreaId":dataId}
 								 ,function(result){
 						 			layer.msg("删除成功");
-						 			first_table.reload();
+						 			lineArea_table.reload();
 							 });
 					 }, function(index){
 					 });

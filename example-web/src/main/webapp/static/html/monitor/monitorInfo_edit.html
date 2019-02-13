@@ -99,9 +99,10 @@
 				            dataType:"json",
 				            data:datas.field,
 				           success:function(result){
-				        	   layer.msg(result.msg);
+				        	   var iframe_index = parent.layer.getFrameIndex(window.name);
+				        	   parent.layer.msg(result.msg);
 					 			parent.monitorInfo_table.reload();
-								parent.layer.close(index);
+								parent.layer.close(iframe_index);
 				           }
 				        });
 				 }, function(index2){

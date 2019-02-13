@@ -116,13 +116,14 @@
 							layer.confirm('是否该条数据？', {
 								  btn: ['确认', '取消']
 								 }, function(index){
-									 var index2 = parent.layer.getFrameIndex(window.name)
-									  var frameId=parent.document.getElementById(iframe_name).getElementsByTagName("iframe")[0].id;
+									 var iframe_index = parent.layer.getFrameIndex(window.name)
 									 //获取兄弟iframe 对象  
-									var brotherIframe$ = parent.window[frameId].layui.jquery;
-									   brotherIframe$('input[name=monitorAreaId]').attr('value', checkObj.data[0].lineAreaId); 
-									   brotherIframe$('#span_lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
-									parent.layer.close(index2);
+									 var frameId=parent.document.getElementById(iframe_name).getElementsByTagName("iframe")[0].id;
+									 var brotherIframe$ = parent.window[frameId].layui.jquery;
+									   	brotherIframe$('input[name=monitorAreaId]').attr('value', checkObj.data[0].lineAreaId); 
+									   	brotherIframe$('#span_lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
+									   	layer.msg("操作成功");
+										parent.layer.close(iframe_index);
 								 }, function(index){
 								 });
 						}
