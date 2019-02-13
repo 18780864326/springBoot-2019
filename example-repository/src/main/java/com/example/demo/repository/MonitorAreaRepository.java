@@ -6,5 +6,5 @@ import com.example.demo.entity.MonitorArea;
 
 
 public interface MonitorAreaRepository  extends BaseRepository<MonitorArea, Long>{
-	MonitorArea findByMonitorId(long id);
+	MonitorArea findByMonitorId(Long id);
 }
