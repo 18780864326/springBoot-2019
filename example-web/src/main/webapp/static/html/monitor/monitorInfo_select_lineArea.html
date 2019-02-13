@@ -44,7 +44,7 @@
 		          		<i class="layui-icon layui-icon-add-1 "></i>
 		        		 选择
 		         		 </button>
-		        	</div>
+		        </div>
 			<table class="layui-hide" id="dataTable" lay-filter="intfData"></table>
 	  </div>
 	</div>
@@ -119,7 +119,6 @@
 									 var index2 = parent.layer.getFrameIndex(window.name)
 									  var frameId=parent.document.getElementById(iframe_name).getElementsByTagName("iframe")[0].id;
 									 //获取兄弟iframe 对象  
-									 var frameId=parent.document.getElementById('monitorArea_edit').getElementsByTagName("iframe")[0].id;
 									var brotherIframe$ = parent.window[frameId].layui.jquery;
 									   brotherIframe$('input[name=monitorAreaId]').attr('value', checkObj.data[0].lineAreaId); 
 									   brotherIframe$('#span_lineAreaInfo').html(checkObj.data[0].lineAreaDescription);
