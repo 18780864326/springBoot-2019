@@ -1,6 +1,6 @@
 package com.example.demo.system.login.service;
 
-import com.example.demo.entity.TestUser;
+import com.example.demo.entity.SystemUser;
 import com.example.demo.system.login.dto.LoginDto;
 
 public interface LoginService {
@@ -10,7 +10,7 @@ public interface LoginService {
 	 * @param loginDto
 	 * @return
 	 */
-	TestUser findUserInfoByDto(LoginDto loginDto);
+	SystemUser findUserInfoByDto(LoginDto loginDto);
 
 	int logOut();
 }
