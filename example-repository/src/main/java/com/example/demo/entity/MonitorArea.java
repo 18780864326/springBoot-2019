@@ -23,7 +23,8 @@ public class MonitorArea implements java.io.Serializable {
 	private Integer monitorCh;
 	private String monitorNvrUser;
 	private String monitorCameraIp;
-
+	private String validFlag;
+	
 	public MonitorArea() {
 	}
 
@@ -128,4 +129,12 @@ public class MonitorArea implements java.io.Serializable {
 		this.monitorCameraIp = monitorCameraIp;
 	}
 
+	@Column(name = "VALID_FLAG", length = 1)
+	public String getValidFlag() {
+		return validFlag;
+	}
+
+	public void setValidFlag(String validFlag) {
+		this.validFlag = validFlag;
+	}
 }

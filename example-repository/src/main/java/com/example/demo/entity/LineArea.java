@@ -20,7 +20,7 @@ public class LineArea implements java.io.Serializable {
 	private String lineAreaName;
 	private String lineAreaDescription;
 	private String lineAreaProcess;
-
+	private String validFlag;
 	public LineArea() {
 	}
 
@@ -102,6 +102,14 @@ public class LineArea implements java.io.Serializable {
 
 	public void setLineAreaProcess(String lineAreaProcess) {
 		this.lineAreaProcess = lineAreaProcess;
+	}
+	@Column(name = "VALID_FLAG", length = 1)
+	public String getValidFlag() {
+		return validFlag;
+	}
+
+	public void setValidFlag(String validFlag) {
+		this.validFlag = validFlag;
 	}
 
 }
