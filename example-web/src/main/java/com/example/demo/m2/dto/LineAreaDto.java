@@ -11,6 +11,8 @@ public class LineAreaDto {
 	private String lineAreaName;//覆盖范围
 	private String lineAreaDescription;//描述
 	private String lineAreaProcess;//所属制程
+	private String validFlag;
+	
 	private List<MonitorInfoDto> list;
 	public Long getLineAreaId() {
 		return lineAreaId;
@@ -60,11 +62,19 @@ public class LineAreaDto {
 	public void setList(List<MonitorInfoDto> list) {
 		this.list = list;
 	}
+	public String getValidFlag() {
+		return validFlag;
+	}
+	public void setValidFlag(String validFlag) {
+		this.validFlag = validFlag;
+	}
 	@Override
 	public String toString() {
 		return "LineAreaDto [lineAreaId=" + lineAreaId + ", lineAreaBuild=" + lineAreaBuild + ", lineAreaF=" + lineAreaF
 				+ ", lineAreaLine=" + lineAreaLine + ", lineAreaName=" + lineAreaName + ", lineAreaDescription="
-				+ lineAreaDescription + ", lineAreaProcess=" + lineAreaProcess + ", list=" + list + "]";
+				+ lineAreaDescription + ", lineAreaProcess=" + lineAreaProcess + ", validFlag=" + validFlag + ", list="
+				+ list + "]";
 	}
+	
 	
 }

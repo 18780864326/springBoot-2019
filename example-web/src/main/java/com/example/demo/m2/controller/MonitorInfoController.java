@@ -20,119 +20,130 @@ public class MonitorInfoController {
 
 	@Resource
 	private MonitorInfoService monitorInfoService;
-	
+
 	@RequestMapping("queryMonitorInfo")
-	public String  queryMonitorInfo(MonitorInfoDto monitorInfoDto,int pageSize,int pageIndex) {
-		PagingTool<?> pagingTool = monitorInfoService.queryMonitorAreaInfoBypageInfo(monitorInfoDto, pageSize, pageIndex);
-	   MessageInfo messageInfo = new 	MessageInfo();
-	   messageInfo.setStatus(0);
-	   messageInfo.setMsg("ok");
-	   messageInfo.setData(pagingTool);
+	public String queryMonitorInfo(MonitorInfoDto monitorInfoDto, int pageSize, int pageIndex) {
+		PagingTool<?> pagingTool = monitorInfoService.queryMonitorAreaInfoBypageInfo(monitorInfoDto, pageSize,
+				pageIndex);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(200);//layui 数据表格成功状态码 为 200
+		messageInfo.setMsg("ok");
+		messageInfo.setData(pagingTool);
 		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
 		return JSONObject.toJSONString(object);
 	}
-	
+
 	@RequestMapping("queryLineAreaInfo")
-	public String queryLineAreaInfo(LineAreaDto lineAreaDto,int pageSize,int pageIndex) {
-		PagingTool<LineArea> pagingTool = monitorInfoService.queryLineAreaInfoInfoBypageInfo(lineAreaDto, pageSize, pageIndex);
-		 MessageInfo messageInfo = new 	MessageInfo();
-		   messageInfo.setStatus(0);
-		   messageInfo.setMsg("ok");
-		   messageInfo.setData(pagingTool);
+	public String queryLineAreaInfo(LineAreaDto lineAreaDto, int pageSize, int pageIndex) {
+		PagingTool<LineArea> pagingTool = monitorInfoService.queryLineAreaInfoInfoBypageInfo(lineAreaDto, pageSize,
+				pageIndex);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(200);//layui 数据表格成功状态码 为 200
+		messageInfo.setMsg("ok");
+		messageInfo.setData(pagingTool);
 		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
 		return JSONObject.toJSONString(object);
 	}
-	
-	@RequestMapping(value="saveMonitorInfo",method=RequestMethod.POST)
+
+	@RequestMapping(value = "saveMonitorInfo", method = RequestMethod.POST)
 	public String saveMonitorInfo(MonitorInfoDto monitorInfoDto) {
 		Integer status = monitorInfoService.saveMonitorInfo(monitorInfoDto);
-		 MessageInfo messageInfo = new 	MessageInfo();
-		   messageInfo.setStatus(status);
-		   if(status==1) {
-			   messageInfo.setMsg("提交成功");
-		   }else {
-			   messageInfo.setMsg("提交失败");
-		   }
-			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
-			return JSONObject.toJSONString(object);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		if (status == 1) {
+			messageInfo.setMsg("提交成功");
+		} else {
+			messageInfo.setMsg("提交失败");
+		}
+		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(object);
 	}
-	
-	@RequestMapping(value="saveLineAreaInfo",method=RequestMethod.POST)
+
+	@RequestMapping(value = "saveLineAreaInfo", method = RequestMethod.POST)
 	public String saveLineAreaInfo(LineAreaDto lineAreaDto) {
 		Integer status = monitorInfoService.saveLineAreaInfo(lineAreaDto);
-		 MessageInfo messageInfo = new 	MessageInfo();
-		   messageInfo.setStatus(status);
-		   if(status==1) {
-			   messageInfo.setMsg("提交成功");
-		   }else {
-			   messageInfo.setMsg("提交失败");
-		   }
-			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
-			return JSONObject.toJSONString(object);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		if (status == 1) {
+			messageInfo.setMsg("提交成功");
+		} else {
+			messageInfo.setMsg("提交失败");
+		}
+		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(object);
 	}
-	
+
 	@RequestMapping("updateLineAreaInfo")
 	public String updateLineAreaInfo(LineAreaDto lineAreaDto) {
 		Integer status = monitorInfoService.updateLineAreaInfo(lineAreaDto);
-		MessageInfo messageInfo = new 	MessageInfo();
-		   messageInfo.setStatus(status);
-		   if(status==1) {
-			   messageInfo.setMsg("操作成功");
-		   }else {
-			   messageInfo.setMsg("操作失败");
-		   }
-			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
-			return JSONObject.toJSONString(object);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		if (status == 1) {
+			messageInfo.setMsg("操作成功");
+		} else {
+			messageInfo.setMsg("操作失败");
+		}
+		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(object);
 	}
-	
+
 	@RequestMapping("updateMonitorInfo")
 	public String updateMonitorInfo(MonitorInfoDto monitorInfoDto) {
 		Integer status = monitorInfoService.updataMonitorInfo(monitorInfoDto);
-		MessageInfo messageInfo = new 	MessageInfo();
-		   messageInfo.setStatus(status);
-		   if(status==1) {
-			   messageInfo.setMsg("操作成功");
-		   }else {
-			   messageInfo.setMsg("操作失败");
-		   }
-			JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
-			return JSONObject.toJSONString(object);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		if (status == 1) {
+			messageInfo.setMsg("操作成功");
+		} else {
+			messageInfo.setMsg("操作失败");
+		}
+		JSONObject object = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(object);
 	}
+
 	@RequestMapping("getMonitorInfo")
 	public String getMonitorInfo(Long monitorAreaId) {
 		MonitorInfoDto monitorInfoDto = monitorInfoService.queryMonitorAreaInfoById(monitorAreaId);
-	    MessageInfo messageInfo = new MessageInfo();
-	    int  status = 0;
-		if(monitorInfoDto != null ) {
-			status=1;
+		MessageInfo messageInfo = new MessageInfo();
+		int status = 0;
+		if (monitorInfoDto != null) {
+			status = 1;
 		}
 		messageInfo.setStatus(status);
 		messageInfo.setData(monitorInfoDto);
 		JSONObject obj = (JSONObject) JSONObject.toJSON(monitorInfoDto);
 		return JSONObject.toJSONString(obj);
 	}
-	
+
 	@RequestMapping("getLineAreaInfo")
 	public String getLineAreaInfo(Long lineAreaId) {
 		LineAreaDto lineAreaDto = monitorInfoService.queryLineAreaInfoInfoById(lineAreaId);
-		 MessageInfo messageInfo = new MessageInfo();
-		    int  status = 0;
-			if(lineAreaDto != null ) {
-				status=1;
-			}
-			messageInfo.setStatus(status);
-			messageInfo.setData(lineAreaDto);
-			JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
-			return JSONObject.toJSONString(obj);
+		MessageInfo messageInfo = new MessageInfo();
+		int status = 0;
+		if (lineAreaDto != null) {
+			status = 1;
+		}
+		messageInfo.setStatus(status);
+		messageInfo.setData(lineAreaDto);
+		JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(obj);
 	}
-	
+
 	@RequestMapping("deleteLineAreaInfo")
-	public void deleteLineAreaInfo(Long lineAreaId) {
-		monitorInfoService.deleteLineAreaInfo(lineAreaId);
+	public String deleteLineAreaInfo(Long lineAreaId) {
+		Integer status = monitorInfoService.deleteLineAreaInfo(lineAreaId);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(obj);
 	}
-	
+
 	@RequestMapping("deleteMonitorInfo")
-	public void deleteMonitorInfo(Long monitorAreaId) {
-		monitorInfoService.deleteMonitorInfo(monitorAreaId);
+	public String deleteMonitorInfo(Long monitorAreaId) {
+		Integer status = monitorInfoService.deleteMonitorInfo(monitorAreaId);
+		MessageInfo messageInfo = new MessageInfo();
+		messageInfo.setStatus(status);
+		JSONObject obj = (JSONObject) JSONObject.toJSON(messageInfo);
+		return JSONObject.toJSONString(obj);
 	}
 }

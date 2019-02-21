@@ -18,20 +18,20 @@ import org.slf4j.LoggerFactory;
 public class LoginFilter  implements Filter {
 		 private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 	   //不需要登录就可以访问的路径(白名单)
-   private String[] includeUrls = new String[]{"/MonitorSystem/static/js",
-		   "/MonitorSystem/loginSystem.html",
-		   "/MonitorSystem/system",
-		   "/MonitorSystem/static/layui",
-		   "/MonitorSystem/module/monitorInfo",
-   		   "/MonitorSystem/static/plugins",
-   		   "/MonitorSystem/static/images",
-   		   "/MonitorSystem/static/html/conmmon"};
-   
+   private String  servletPath = "/MonitorSystem";
+   private String[] includeUrls = new String[]{
+		   "/static/js",
+		   "/loginSystem.html",
+		   "/system",
+		   "/static/layui",
+		   "/module/monitorInfo",
+   		   "/static/plugins",
+   		   "/static/images",
+   		   "/static/html/conmmon"};
    private String not_login_url = "/system/notLogin";//处理未登录  同步HTTP请求
    private String not_login_ajax_url = "/system/longin_ajaxFilter"; //处理未登录  异步HTTP请求
    private String login_flag = "userName";//登录标识 变量名
    public LoginFilter(){};
-   
    @Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -76,7 +76,7 @@ public class LoginFilter  implements Filter {
 	  */
 	 public boolean isNeedFilter(String uri) {
 	        for (String includeUrl : includeUrls) {
-	            if( uri.startsWith(includeUrl)) {
+	            if( uri.startsWith(servletPath+includeUrl)) {
 	                return false;
 	            }
 	        }

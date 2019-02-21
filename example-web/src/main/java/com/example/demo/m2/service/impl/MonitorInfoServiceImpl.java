@@ -2,12 +2,10 @@ package com.example.demo.m2.service.impl;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import javax.annotation.Resource;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.LineArea;
 import com.example.demo.entity.MonitorArea;
 import com.example.demo.m2.dto.LineAreaDto;
@@ -19,6 +17,8 @@ import com.example.demo.utils.PagingTool;
 
 @Service
 public class MonitorInfoServiceImpl  implements  MonitorInfoService{
+	
+	
 	@Resource
 	private LineAreaRepository lineAreaRepository;
 	
@@ -55,8 +55,8 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 				"               t.monitor_camera_ip,\r\n" + 
 				"               a.line_area_process\r\n" + 
 				"          from MONITOR_AREA t, LINE_AREA a\r\n" + 
-				"         where t.monitor_area_id = a.line_area_id(+)) t\r\n" + 
-				" where 1 = 1\r\n" ;
+				"         where t.valid_flag = 1 and t.monitor_area_id = a.line_area_id(+)) t\r\n" + 
+				" where 1 = 1 \r\n" ;
 			if(lineAreaProcess != null && !"".equals(lineAreaProcess)) {
 				sql += " and upper(t.line_area_process) like upper('%"+lineAreaProcess+"%') " ;
 			}
@@ -79,7 +79,6 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 		 String lineAreaBuild = lineAreaDto.getLineAreaBuild();//条件 参数 楼栋
 		 String lineAreaF = lineAreaDto.getLineAreaF();//条件 参数 楼层
 //		 String lineAreaLine = lineAreaDto.getLineAreaLine();//条件 参数 区别/模组
-		 
 		String sql = 
 				"select t.line_area_id,\r\n" + 
 				"       t.line_area_build,\r\n" + 
@@ -87,9 +86,10 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 				"       t.line_area_line,\r\n" + 
 				"       t.line_area_name,\r\n" + 
 				"       t.line_area_description,\r\n" + 
-				"       t.line_area_process\r\n" + 
+				"       t.line_area_process, \r\n" + 
+				"      	t.valid_flag\r\n" + 
 				"  from LINE_AREA t\r\n" +
-				" where  1=1 ";
+				" where t.valid_flag = 1 ";
 		if(lineAreaF != null && !"".equals(lineAreaF)) {
 			sql += " and t.line_area_f = upper('"+lineAreaF+"')\r\n";
 		}
@@ -114,6 +114,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 	     lineAreaDto.setLineAreaId(lineAreaId);
 	      LineArea lineArea = new LineArea();
 	     BeanUtils.copyProperties(lineAreaDto, lineArea);
+	     lineArea.setValidFlag("1"); //有效
 	     LineArea save = lineAreaRepository.save(lineArea);
 	     if(save != null) {
 	    	 status =1;
@@ -130,6 +131,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 	    monitorInfoDto.setMonitorId(monitorId);
 	      MonitorArea monitorArea = new MonitorArea();
 	     BeanUtils.copyProperties(monitorInfoDto, monitorArea);
+	     monitorArea.setValidFlag("1"); //有效标识
 	     MonitorArea save = monitorAreaRepository.save(monitorArea);
 	     if(save != null) {
 	    	 status =1;
@@ -163,7 +165,7 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 
 	@Override
 	public MonitorInfoDto queryMonitorAreaInfoById(Long monitorAreaId) {
-		MonitorArea monitorArea = monitorAreaRepository.findByMonitorId(monitorAreaId);
+		MonitorArea monitorArea = monitorAreaRepository.findByMonitorIdAndValidFlag(monitorAreaId,"1");
 		MonitorInfoDto monitorInfoDto = null;
 		if(monitorArea != null) {
 			monitorInfoDto = new  MonitorInfoDto();
@@ -174,8 +176,11 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 
 	@Override
 	public LineAreaDto queryLineAreaInfoInfoById(Long lineAreaId) {
-		 LineArea lineArea = lineAreaRepository.findBylineAreaId(lineAreaId);
 		  LineAreaDto lineAreaDto = null ;
+		  if(lineAreaId == null) {
+			  return lineAreaDto;
+		  }
+		  LineArea lineArea = lineAreaRepository.findBylineAreaIdAndValidFlag(lineAreaId,"1");
 		 if(lineArea != null) {
 			 lineAreaDto = new LineAreaDto();
 			 BeanUtils.copyProperties(lineArea,lineAreaDto);
@@ -184,12 +189,24 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 	}
 
 	@Override
-	public void deleteLineAreaInfo(Long id) {
-		lineAreaRepository.deleteById(id);
+	public Integer deleteLineAreaInfo(Long id) {
+		  LineArea lineArea = lineAreaRepository.findBylineAreaIdAndValidFlag(id,"1");
+		  if(lineArea == null) {
+			  return 2;
+		  }
+		  lineArea.setValidFlag("0"); //0标识 此条数据无效
+		  lineAreaRepository.save(lineArea);
+		 return 1;
 	}
 
 	@Override
-	public void deleteMonitorInfo(Long id) {
-		monitorAreaRepository.deleteById(id);
+	public Integer deleteMonitorInfo(Long id) {
+		MonitorArea monitorArea = monitorAreaRepository.findByMonitorIdAndValidFlag(id,"1");
+		 if(monitorArea == null) {
+			  return 2;
+		  }
+		 monitorArea.setValidFlag("0");//0标识 此条数据无效
+		monitorAreaRepository.save(monitorArea);
+		 return 1;
 	}
 }	

@@ -34,14 +34,10 @@
           <i class="layui-icon layui-icon-chart-screen" ></i>
           	监控管理</a>
           <dl class="layui-nav-child">
-           	<dd><a  class="site-demo-active"  href="#" data-type="tabAdd"  
-           	data-url='/MonitorSystem/static/html/monitor/lineArea.html'
-           	data-id = 'lineArea_' data-title = '监控区域信息'>
+           	<dd><a href="javascript:;" onclick=openPage('/monitor/lineArea')>
            	 <i class="layui-icon layui-icon-list" ></i>
            	监控区域信息</a></dd>
-            <dd><a class="site-demo-active" href="#" data-type="tabAdd" 
-            data-url='/MonitorSystem/static/html/monitor/monitorInfo.html'
-            data-id = 'monitorInfo_' data-title = '监控设备信息'>
+            <dd><a href="javascript:;" onclick=openPage('/monitor/monitorInfo')>
              <i class="layui-icon layui-icon-list" ></i>
         	    监控设备信息</a></dd>
           </dl>
@@ -51,61 +47,27 @@
   </div>
   
   <div class="layui-body">
-	  <div id="nav">
-			 <div class="layui-tab" lay-filter="bodyContent" lay-data="{ height:332}">
-				 <ul id="bodyContent" class="layui-tab-title">
-				 </ul>
-			   <div class="layui-tab-content">
-			   </div>
-		  	</div>
-	  </div>
+    <!-- 内容主体区域 -->
+	<iframe  id="showContent" style="width: 100%;height: 99%" frameborder=0>  </iframe>
+  </div>
+  
   <div class="layui-footer">
     ©2019-2020 -Foxconn.com
   </div>
-</div>
 </div>
 <script src="/MonitorSystem/static/layui/layui.js"></script>
 <script type="text/javascript" src="/MonitorSystem/static/js/jquery-3.3.1.min.js"></script>
 <script>
 //JavaScript代码区域
-layui.use(['element'], function(){
-  let $=layui.$;
-  let element = layui.element;
-
-  var active = {
-	tabAdd: function (obj){
-		var isData = false;
-		 $.each($(".layui-tab-title li[lay-id]"), function () {
-             //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
-             if ($(this).attr("lay-id") == obj.data('id')) {
-                 isData = true;
-             }
-         })
-         if(!isData){
-        	 element.tabAdd('bodyContent',{
-     			title: obj.data('title')
-     	        ,content:'<iframe src="'+ obj.data('url') + '" style="width: 100%;height: 99%"></iframe>'
-     	        ,id: obj.data('id') 
-     			});
-             }
-		 element.tabChange("bodyContent", obj.data('id'));
-		 
-		}
-	  }
-
-  $('.site-demo-active').on('click', function(){
-	    var othis = $(this),
-	     type = othis.data('type');
-	     active[type] ? active[type].call(this, othis) : '';
-	  });
-  $("#bodyContent").tabs({
-		show:function(obj,tab){
-		$(tab.panel).find('IFRAME').attr("height",tab.panel.scrollHeight);
-		}
-		});
+layui.use('element', function(){
+  var element = layui.element;
   
 });
 
+function openPage(path){
+	var url='/MonitorSystem/static/html'+path+'.html';
+	$('#showContent').attr('src',url);
+}
 </script>
 </body>
 </html>

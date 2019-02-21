@@ -40,7 +40,7 @@ public interface MonitorInfoService {
 	* @Description:删除数据
 	* @param id
 	 */
-	public void deleteLineAreaInfo(Long id);
+	public Integer deleteLineAreaInfo(Long id);
 	
 	/**
 	 * 
@@ -48,7 +48,7 @@ public interface MonitorInfoService {
 	* @Description:删除数据
 	* @param id
 	 */
-	public void deleteMonitorInfo(Long  id);
+	public Integer deleteMonitorInfo(Long  id);
 	
 	/**
 	 *  分页查询监控设备信息

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>监控系统</title>
-  <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
+  <link rel="stylesheet" href="/MonitorSystem/static/layui/css/layui.css">
 </head>
 <body>
 <form class="layui-form"  lay-filter="lineArea_edit"  action="">
@@ -55,25 +55,25 @@
  </div>	
  	<!--  hidden  -->
  	<input type="hidden" name="lineAreaId"   autocomplete="off" class="layui-input">
+ 	<input type="hidden" name="validFlag"   autocomplete="off" class="layui-input">
+ 	
    <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
     </div>
   </div>
 </form>
-    <script src="/demo/static/layui/layui.js"></script>
+    <script src="/MonitorSystem/static/layui/layui.js"></script>
 	<script>
 	layui.use('form', function(){
 		  var form = layui.form;
 		  var $ =layui.$;
-		  var retults;
 		  //监听提交
 		  form.on('submit(formDemo)', function(datas){
-	    	   var index = parent.layer.getFrameIndex(window.name)
 			  layer.confirm('是否确认提交？', {
 				  btn: ['确认', '取消']
 				 }, function(index){
-					 $.ajax({
+					  $.ajax({
 				            type:"post",
 				            url:"/MonitorSystem/monitorArea/updateLineAreaInfo",
 				            dataType:"json",
@@ -91,7 +91,7 @@
 		  });
 		  $.ajax({
 	            type:"get",
-	            url:"/demo/monitorArea/getLineAreaInfo",
+	            url:"/MonitorSystem/monitorArea/getLineAreaInfo",
 	            dataType:"json",
 	            data: {"lineAreaId":parent.dataId},
 	           success:function(result){

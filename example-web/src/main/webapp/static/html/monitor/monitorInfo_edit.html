@@ -4,13 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>监控系统</title>
-  <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
+  <link rel="stylesheet" href="/MonitorSystem/static/layui/css/layui.css">
 </head>
 <body>
 <form class="layui-form"   lay-filter="monitorInfo_edit" action="">
 <div class="layui-fluid" >
 	<div class="layui-card" >
-		<form class="layui-form" action="">
+		 <div class="layui-form-item" style="margin-top: 1rem"> 
+		    <label class="layui-form-label">所属线区</label>
+		    <div class="layui-input-block">
+		       <span id='span_lineAreaInfo'> </span>
+		      <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger"  method="select_lineArea">更改</button>
+		    </div>
+		  </div>
+		
+		
 		<div class="layui-form-item">
 	    	<label class="layui-form-label">播放路徑</label>
 	    	<div class="layui-input-block">
@@ -60,19 +68,12 @@
 	    	</div>
 		</div>
 		
-		<div class="layui-form-item">
-		    <label class="layui-form-label">所属线区</label>
-		    <div class="layui-input-block">
-		       <span id='span_lineAreaInfo'> </span>
-		      <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger"  method="select_lineArea">更改</button>
-		    </div>
-		  </div>
-		  
 	</div>
  </div>	
   	<!--  hidden  -->
  	<input type="hidden" name="monitorId"   autocomplete="off" class="layui-input">
  	<input type="hidden" name="monitorAreaId"   autocomplete="off" class="layui-input">
+ 	<input type="hidden" name="validFlag"   autocomplete="off" class="layui-input">
  	
    <div class="layui-form-item">
     <div class="layui-input-block">
@@ -80,7 +81,7 @@
     </div>
   </div>
 </form>
-    <script src="/demo/static/layui/layui.js"></script>
+    <script src="/MonitorSystem/static/layui/layui.js"></script>
 	<script>
 	layui.use(['form','layer'], function(){
 		  var form = layui.form,
@@ -89,13 +90,12 @@
 		  var retults;
 		  //监听提交
 		  form.on('submit(formDemo)', function(datas){
-			  var index = parent.layer.getFrameIndex(window.name)
 			  layer.confirm('是否确认提交？', {
 				  btn: ['确认', '取消']
-				 }, function(index2){
+				 }, function(index){
 					  $.ajax({
 				            type:"post",
-				            url:"/demo/monitorArea/updateMonitorInfo",
+				            url:"/MonitorSystem/monitorArea/updateMonitorInfo",
 				            dataType:"json",
 				            data:datas.field,
 				           success:function(result){
@@ -105,14 +105,14 @@
 								parent.layer.close(iframe_index);
 				           }
 				        });
-				 }, function(index2){
+				 }, function(index){
 				 });
 			  return false;
 		  });
 		  
 		  $.ajax({
 	            type:"get",
-	            url:"/demo/monitorArea/getMonitorInfo",
+	            url:"/MonitorSystem/monitorArea/getMonitorInfo",
 	            dataType:"json",
 	            data: {"monitorAreaId":parent.table_monitorId},
 	           success:function(retult){
@@ -121,7 +121,7 @@
 	        	   //加载线区信息
 		        	$.ajax({
 			   	            type:"get",
-			   	            url:"/demo/monitorArea/getLineAreaInfo",
+			   	            url:"/MonitorSystem/monitorArea/getLineAreaInfo",
 			   	            dataType:"json",
 			   	            data: {"lineAreaId":retult.monitorAreaId},
 			   	           	success:function(retult2){
@@ -141,7 +141,7 @@
 					  title:'监控设备信息增加',
 					  id: 'monitorArea_select',//防止重复
 					  offset: 'auto',
-					  content: '/demo/static/html/monitor/monitorInfo_select_lineArea.html',
+					  content: '/MonitorSystem/static/html/monitor/monitorInfo_select_lineArea.html',
 					  btn: '关闭',
 					  anim: 5,
 					  maxmin: true,

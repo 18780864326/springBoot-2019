@@ -20,7 +20,7 @@ public class LoginServiceImpl  implements LoginService{
 	public SystemUser findUserInfoByDto(LoginDto loginDto) {
 		String userName = loginDto.getUserName();
 		String password = loginDto.getPassword();
-		SystemUser   user=   systemUserRepository.findByUserNameAndPassword(userName, password);
+		SystemUser   user=   systemUserRepository.findByUserNameAndUserPassword(userName, password);
 		return user;
 	}
 

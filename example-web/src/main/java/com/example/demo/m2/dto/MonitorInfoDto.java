@@ -13,6 +13,8 @@ public class MonitorInfoDto  extends OraclePageDto {
 	private String monitorNvrUser;//NVR 賬號
 	private String monitorCameraIp;//攝像頭IP,一般情況無用
 	private String lineAreaProcess;//所属制程
+	private String validFlag;
+	
 	public Long getMonitorId() {
 		return monitorId;
 	}
@@ -76,14 +78,20 @@ public class MonitorInfoDto  extends OraclePageDto {
 	public Integer getMonitorCh() {
 		return monitorCh;
 	}
+	public String getValidFlag() {
+		return validFlag;
+	}
+	public void setValidFlag(String validFlag) {
+		this.validFlag = validFlag;
+	}
 	@Override
 	public String toString() {
 		return "MonitorInfoDto [monitorId=" + monitorId + ", monitorPlay=" + monitorPlay + ", monitorAreaId="
 				+ monitorAreaId + ", monitorDescription=" + monitorDescription + ", monitorNvrIp=" + monitorNvrIp
 				+ ", monitorNvrPassword=" + monitorNvrPassword + ", monitorCh=" + monitorCh + ", monitorNvrUser="
 				+ monitorNvrUser + ", monitorCameraIp=" + monitorCameraIp + ", lineAreaProcess=" + lineAreaProcess
-				+ "]";
+				+ ", validFlag=" + validFlag + "]";
 	}
 
-	
+
 }
