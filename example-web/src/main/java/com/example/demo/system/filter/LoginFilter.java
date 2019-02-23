@@ -14,20 +14,22 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 public class LoginFilter  implements Filter {
 		 private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 	   //不需要登录就可以访问的路径(白名单)
-   private String  servletPath = "/MonitorSystem";
+	   @Value("${context.project-directory}")
+   private String  rootDirectory;
    private String[] includeUrls = new String[]{
-		   "/static/js",
-		   "/loginSystem.html",
-		   "/system",
-		   "/static/layui",
-		   "/module/monitorInfo",
-   		   "/static/plugins",
-   		   "/static/images",
-   		   "/static/html/conmmon"};
+		   "static/js",
+		   "loginSystem.html",
+		   "system",
+		   "static/layui",
+		   "module/monitorInfo",
+   		   "static/plugins",
+   		   "static/images",
+   		   "static/html/conmmon"};
    private String not_login_url = "/system/notLogin";//处理未登录  同步HTTP请求
    private String not_login_ajax_url = "/system/longin_ajaxFilter"; //处理未登录  异步HTTP请求
    private String login_flag = "userName";//登录标识 变量名
@@ -43,7 +45,6 @@ public class LoginFilter  implements Filter {
 	        HttpServletResponse response = (HttpServletResponse) servletResponse;
 	        HttpSession session = request.getSession(false);
 	        String uri = request.getRequestURI();
-//	        System.out.println("filter url:"+uri);
 	        boolean needFilter = isNeedFilter(uri);
 	        if (!needFilter) { //不需要过滤直接传给下一个过滤器
 	            filterChain.doFilter(servletRequest, servletResponse);
@@ -76,7 +77,7 @@ public class LoginFilter  implements Filter {
 	  */
 	 public boolean isNeedFilter(String uri) {
 	        for (String includeUrl : includeUrls) {
-	            if( uri.startsWith(servletPath+includeUrl)) {
+	            if( uri.startsWith(rootDirectory+includeUrl)) {
 	                return false;
 	            }
 	        }

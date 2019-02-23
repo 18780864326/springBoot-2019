@@ -1,3 +1,0 @@
-spring: 
-  profile: 
-    active: Jpa_jdbc

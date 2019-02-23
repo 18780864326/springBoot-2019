@@ -95,7 +95,8 @@ public class MonitorInfoServiceImpl  implements  MonitorInfoService{
 		}
 		if(lineAreaBuild != null && !"".equals(lineAreaBuild)) {
 			sql += " and t.line_area_build like upper('%"+lineAreaBuild+"%')\r\n";
-		}if(lineAreaProcess != null && !"".equals(lineAreaProcess)) {
+		}
+		if(lineAreaProcess != null && !"".equals(lineAreaProcess)) {
 			sql += " and upper(t.line_area_process) like upper('%"+lineAreaProcess+"%') " ;
 		}
 		Integer countNumber = monitorAreaRepository.countBySqlToInteger(sql);

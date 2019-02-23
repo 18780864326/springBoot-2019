@@ -9,14 +9,14 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin" id ="homePage_vm">
   <div class="layui-header">
-    <div class="layui-logo">{{header_title}} </div>
+    <div class="layui-logo">{{header_title}}} </div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
     </ul>
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-	        	{{header_user_info}}
+	        	{{header_user_info}}}
         </a>
         <dl class="layui-nav-child">
         </dl>
@@ -29,14 +29,17 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline"  lay-filter="test">
-        <li class="layui-nav-item" >
+        <li class="layui-nav-item " >
           <a href="javascript:;">
-          <i class="layui-icon layui-icon-survey" ></i>
-          	考勤管理</a>
+          <i class="layui-icon layui-icon-chart-screen" ></i>
+          	监控管理</a>
           <dl class="layui-nav-child">
-           	<dd><a href="javascript:;" onclick=openPage('/attendance/callName')>
+           	<dd><a href="javascript:;" onclick=openPage('/monitor/lineArea')>
            	 <i class="layui-icon layui-icon-list" ></i>
-           	考勤点到</a></dd>
+           	监控区域信息</a></dd>
+            <dd><a href="javascript:;" onclick=openPage('/monitor/monitorInfo')>
+             <i class="layui-icon layui-icon-list" ></i>
+        	    监控设备信息</a></dd>
           </dl>
         </li>
       </ul>

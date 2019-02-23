@@ -18,8 +18,8 @@ import com.example.demo.vo.MessageInfo;
 @RequestMapping("/system")
 public class LoginController {
 		@Resource
-	private LoginService loginService;
-	
+		private LoginService loginService;
+
 	/**
 	 * 登录处理
 	 * @param loginDto
