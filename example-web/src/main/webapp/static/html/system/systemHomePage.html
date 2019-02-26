@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>智能云网 </title>
-  <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="/demo/static/layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="/demo/static/css/common/common.css"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin" id ="homePage_vm">
-  <div class="layui-header">
-    <div class="layui-logo">{{header_title}} </div>
+  <div class="layui-header"v-cloak>
+    <div class="layui-logo" >{{header_title}} </div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
     </ul>
@@ -24,7 +25,7 @@
       <li class="layui-nav-item"><a href="/demo/system/logOut">退出</a></li>
     </ul>
   </div>
-  
+
   <div class="layui-side layui-bg-gray">
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -34,7 +35,7 @@
           <i class="layui-icon layui-icon-survey" ></i>
           	考勤管理</a>
           <dl class="layui-nav-child">
-           	<dd><a href="javascript:;" onclick=openPage('/attendance/callName')>
+           	<dd><a href="javascript:;"  method="load_page" data-url="/html/attendance/callName.html">
            	 <i class="layui-icon layui-icon-list" ></i>
            	考勤点到</a></dd>
           </dl>
@@ -45,7 +46,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-	<iframe  id="showContent" style="width: 100%;height: 99%" frameborder=0>  </iframe>
+	<div  id="showContent" style="width: 100%;height: 99%" frameborder=0></div>
   </div>
   
   <div class="layui-footer">
@@ -55,6 +56,26 @@
 <script src="/demo/static/layui/layui.js"></script>
 <script type="text/javascript" src="/demo/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/demo/static/plugins/vue/vue.min.js"></script>
-<script type="text/javascript" src="/demo/static/js/common/system_homePage.js"> </script>
+<script>
+  $(function () {
+    var homePage_vm= new Vue({
+      el:'#homePage_vm',
+      data:{
+        header_user_info :"C3005890",
+        header_title:"考勤点到管理系统"
+      }
+    });
+    $("a[method=load_page]").on("click",function () {
+      var page_url = $(this).attr("data-url")
+      var url='/demo/static/'+page_url;
+      $('#showContent').load(url);
+    })
+  })
+  layui.use('element', function(){
+  });
+
+
+
+</script>
 </body>
 </html>

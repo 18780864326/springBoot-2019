@@ -5,7 +5,7 @@ layui.use('form', function(){
         el:'#context_login',
         data:{
             login_title1:'登 录',
-            login_title2:'考勤点到管理系统',
+            login_title2:'Foxconn考勤管理系统',
         }
     });
     var rootDefault = '/demo/'

@@ -7,28 +7,28 @@
   <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin" id ="homePage_vm">
+<div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo">{{header_title}}} </div>
+    <div class="layui-logo">后台管理中心 </div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
     </ul>
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-	        	{{header_user_info}}}
+	        	用户，你好！
         </a>
         <dl class="layui-nav-child">
         </dl>
       </li>
       <li class="layui-nav-item"><a href="/demo/system/logOut">退出</a></li>
-
+    </ul>
   </div>
   
   <div class="layui-side layui-bg-gray">
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline"  lay-filter="test">
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item " >
           <a href="javascript:;">
           <i class="layui-icon layui-icon-chart-screen" ></i>
@@ -57,7 +57,17 @@
 </div>
 <script src="/demo/static/layui/layui.js"></script>
 <script type="text/javascript" src="/demo/static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/demo/static/plugins/vue/vue.min.js"></script>
-<script type="text/javascript" src="/demo/static/js/login/system_homePage.js"> </script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+
+function openPage(path){
+	var url='/demo/static/html'+path+'.html';
+	$('#showContent').attr('src',url);
+}
+</script>
 </body>
 </html>

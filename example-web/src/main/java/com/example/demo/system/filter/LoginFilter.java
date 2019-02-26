@@ -23,6 +23,7 @@ public class LoginFilter  implements Filter {
    private String  rootDirectory;
    private String[] includeUrls = new String[]{
 		   "static/js",
+		   "static/css",
 		   "loginSystem.html",
 		   "system",
 		   "static/layui",

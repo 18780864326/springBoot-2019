@@ -1,5 +1,4 @@
-layui.use('element', function(){
-    var element = layui.element;
+$(function () {
     var homePage_vm= new Vue({
         el:'#homePage_vm',
         data:{
@@ -7,9 +6,11 @@ layui.use('element', function(){
             header_title:"考勤点到管理系统"
         }
     });
+    function openPage(path){
+        var url='/MonitorSystem/static/html'+path+'.html';
+        $('#showContent').attr('src',url);
+    }
+})
+layui.use('element', function(){
 });
 
-function openPage(path){
-    var url='/MonitorSystem/static/html'+path+'.html';
-    $('#showContent').attr('src',url);
-}

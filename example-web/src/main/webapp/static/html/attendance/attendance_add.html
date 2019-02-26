@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>新增考勤人员信息</title>
+    <link rel="stylesheet" href="/demo/static/layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form-item" style="margin-top: 1rem">
+                <label class="layui-form-label">工号<em class="dotRed">*</em></label>
+                <div class="layui-input-block">
+                    <input type="text" name="工号" placeholder="请输入工号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="姓名" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">假别</label>
+                <div class="layui-input-block ">
+                    <select name="假别" lay-verify="required" lay-search="">
+                        <option value="">假别</option>
+                        <option value="事假">事假</option>
+                        <option value="病假">病假</option>
+                        <option value="病假">调休</option>
+                        <option value="病假">婚假</option>
+                        <option value="病假">产假</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="start_date" name="start_date" placeholder="yyyy-MM-dd">
+                    <i class="layui-icon layui-icon-date" style="position: absolute;top:0.5rem;right: 0.5rem;"></i>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="end_date"  name="end_date" placeholder="yyyy-MM-dd">
+                    <i class="layui-icon layui-icon-date" style="position: absolute;top:0.5rem;right: 0.5rem;"></i>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">事由</label>
+                <div class="layui-input-block " pane>
+                    <textarea name="事由" placeholder="请输入事由" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/demo/static/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form, $ = layui.jquery;
+        var laydate = layui.laydate;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.confirm('是否确认提交？', {
+                btn: ['确认', '取消']
+            }, function (index) {
+                var iframe_index = parent.layer.getFrameIndex(window.name);
+                parent.layer.msg(JSON.stringify(data.field));
+                parent.xxx_table.reload();
+                parent.layer.close(iframe_index);
+                // $.ajax({
+                //     type:"post",
+                //     url:"/MonitorSystem/monitorArea/saveLineAreaInfo",
+                //     dataType:"json",
+                //     data:data.field,
+                //     success:function(result){
+                //         var iframe_index = parent.layer.getFrameIndex(window.name);
+                //         parent.layer.msg(result.msg);
+                //         parent.lineArea_table.reload();
+                //         parent.layer.close(iframe_index);
+                //     }
+                // });
+            }, function (index) {
+            });
+            return false;
+        });
+        laydate.render({
+            elem: '#start_date',
+            type:'datetime'
+        });
+        laydate.render({
+            elem: '#end_date',
+            type:'datetime'
+        });
+    });
+</script>
+</body>
+</html>
